@@ -1,0 +1,11 @@
+<div class="add-task-section">
+    <form (ngSubmit)="addTask()">
+        <input [(ngModel)]="title" type="text" name="title" placeholder="title">
+        <input [(ngModel)]="description" type="text" name="description" placeholder="description">
+        <input [(ngModel)]="due_date" type="datetime" name="due_date" placeholder="due_date">
+        <input [(ngModel)]="prio" type="text" name="prio" placeholder="prio">
+        <input [(ngModel)]="status" type="text" name="status" placeholder="status">
+        <input [(ngModel)]="category" type="text" name="category" placeholder="category">
+        <button type="submit">Add Task</button>
+    </form>
+</div>
