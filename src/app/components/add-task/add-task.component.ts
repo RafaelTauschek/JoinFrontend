@@ -39,7 +39,8 @@ export class AddTaskComponent {
       category: this.category,
     })
     try {
-      let resp = await this.postTasks(task.toJSON());
+      console.log('Task created:', task);
+      let resp = await this.postTasks(task);
       console.log(resp)
     } catch (e) {
       console.log(e)
@@ -48,9 +49,10 @@ export class AddTaskComponent {
 
 
   async postTasks(task: any) {
-    console.log(task);
     const url = environment.baseUrl + '/tasks/';
-    const body = task
+    const body = task.toJSON()
+    console.log('Body',  body);
+    
     return lastValueFrom(this.http.post(url, body));
   }
 

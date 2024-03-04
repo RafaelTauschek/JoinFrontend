@@ -1,0 +1,12 @@
+
+@import '../../../../../styles.scss';
+
+.navbar-btn {
+    background-color: $color-grey;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    width: 100%;
+}

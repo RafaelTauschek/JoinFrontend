@@ -6,6 +6,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { interceptorProvider } from './services/auth-interceptor.service';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,6 +15,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     importProvidersFrom(HttpClientModule),
     interceptorProvider,
-    provideAnimations()
+    provideAnimations(), provideAnimationsAsync()
   ], 
 };

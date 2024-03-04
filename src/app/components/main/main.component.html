@@ -1,20 +1,14 @@
-<div class="main-section">
-    <app-sidebar></app-sidebar>
-</div>
+<mat-drawer-container class="main-page">
+    <mat-drawer mode="side" opened>
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div *ngFor="let task of tasks">{{task.title}}</div>
+    <mat-drawer-content>
+        <app-header></app-header>
+        <main>
+            <app-board></app-board>
+            <app-contacts></app-contacts>
+            <app-add-task></app-add-task>
+        </main>
+    </mat-drawer-content>
+</mat-drawer-container>

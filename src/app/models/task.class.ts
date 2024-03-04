@@ -4,7 +4,7 @@ export class Task {
     due_date: Date | null;
     prio: string;
     status: string;
-    category: string;
+    category: number;
     // assignedto
 
 

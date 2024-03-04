@@ -5,31 +5,29 @@ import { lastValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { BoardComponent } from '../board/board.component';
+import { HeaderComponent } from '../header/header.component';
+import { ContactsComponent } from '../contacts/contacts.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { AddTaskComponent } from '../add-task/add-task.component';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, SidebarComponent],
+  imports: [CommonModule, 
+    RouterOutlet, SidebarComponent, 
+    BoardComponent, HeaderComponent, 
+    ContactsComponent, MatSidenavModule,
+    AddTaskComponent
+  ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
-export class MainComponent implements OnInit {
-  tasks: any = [];
-  error: string = '';
+export class MainComponent {
 
-  constructor(private http: HttpClient) {}
 
-  async ngOnInit() {
-    try {
-      this.tasks = await this.loadTasks();
-      console.log(this.tasks);
-    } catch (e) {
-      this.error = 'Fehler beim Laden!';
-    }
-  }
+  constructor() { }
 
-  async loadTasks() {
-    const url = environment.baseUrl + '/tasks/';
-    return lastValueFrom(this.http.get(url))
-  }
+
+
 }

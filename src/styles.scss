@@ -4,3 +4,18 @@ $color-darkgrey: #091931;
 $color-lightblue: #29ABE2;
 $color-blue: #007CEE;
 
+html,
+body {
+    height: 100dvh;
+    width: 100dvw;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+
+
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
