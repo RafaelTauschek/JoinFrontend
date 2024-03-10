@@ -1,5 +1,46 @@
-<form (ngSubmit)="login()">
-    <input [(ngModel)]="username" name="username" type="email">
-    <input [(ngModel)]="password" name="password" type="password">
-    <button>Login</button>
-</form>
+<div class="login">
+    <div class="header">
+        <div class="logo">
+            <img src="../../../assets/img/logo_dark.svg" alt="logo">
+        </div>
+        <div class="header-content">
+            <span>Not a JOIN user?</span>
+            <button>Sign up</button>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="login-box">
+            <span class="title">Log in</span>
+            <div class="seperator"></div>
+            <form class="login-form" (ngSubmit)="login()">
+                <div class="user-input">
+                    <input [(ngModel)]="username" placeholder="Username" name="username" type="email">
+                    <img src="../../../assets/img/mail.svg" alt="mail">
+                </div>
+                <div class="user-input">
+                    <input [(ngModel)]="password" placeholder="Password" name="password" type="password">
+                    <img src="../../../assets/img/lock.svg" alt="password">
+                </div>
+                <div class="remember-me">
+                    <div class="input">
+                        <input type="checkbox">
+                        <span>Remember me</span>
+                    </div>
+                    <span class="forgot-password">Fogot my password</span>
+                </div>
+                <div class="btn-container">
+                    <button type="submit" class="login-btn">Login</button>
+                    <button type="button" class="guest-login-btn">Guest Log in</button>
+                </div>
+            </form>    
+        </div>
+    
+    
+        <div class="footer">
+            <span>Privacy Policy</span>
+            <span>Legal Notice</span>
+        </div>
+    </div>
+</div>
+
