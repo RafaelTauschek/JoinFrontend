@@ -1,5 +1,4 @@
 export class Contact {
-    username: string;
     first_name: string;
     last_name: string;
     short_name: string;
@@ -9,12 +8,23 @@ export class Contact {
 
 
     constructor(obj: any) {
-        this.username = obj ? obj.username : '';
         this.first_name = obj ? obj.first_name : '';
         this.last_name = obj ? obj.last_name : '';
         this.short_name = obj ? obj.short_name : '';
         this.email = obj ? obj.email : '';
         this.phone_number = obj ? obj.phone_number : '';
         this.color = obj ? obj.color : '';
+    }
+
+
+    public toJSON() {
+        return {
+            first_name: this.first_name,
+            last_name: this.last_name,
+            short_name: this.short_name,
+            email: this.email,
+            phone_number: this.phone_number,
+            color: this.color
+        }
     }
 }

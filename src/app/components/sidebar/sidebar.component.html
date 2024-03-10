@@ -1,19 +1,16 @@
 
 <nav class="sidebar-nav">
-    <div class="content">
-    <img src="./assets/img/logo.png" alt="logo">
+    <img src="./assets/img/logo.svg" alt="logo">
     <div class="btn-container">
-        <app-button imageUrl="./assets/img/summary.png" buttonText="Summary"></app-button>
-        <app-button imageUrl="./assets/img/add-task.png" buttonText="Add Task"></app-button>
-        <app-button imageUrl="./assets/img/board.png" buttonText="Board"></app-button>
-        <app-button imageUrl="./assets/img/contacts.png" buttonText="Contacts"></app-button>
+        <app-button (click)="selectComponent('summary')" imageUrl="./assets/img/summary.png" buttonText="Summary"></app-button>
+        <app-button (click)="selectComponent('addTask')" imageUrl="./assets/img/add-task.png" buttonText="Add Task"></app-button>
+        <app-button (click)="selectComponent('board')" imageUrl="./assets/img/board.png" buttonText="Board"></app-button>
+        <app-button (click)="selectComponent('contacts')" imageUrl="./assets/img/contacts.png" buttonText="Contacts"></app-button>
     </div>
     <div class="footer">
         <span>Privacy Policy</span>
         <span>Legal notice</span>
     </div>
-    </div>
-
 </nav>
 
 

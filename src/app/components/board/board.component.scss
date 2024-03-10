@@ -1,0 +1,71 @@
+.board {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 50px;
+
+    .title {
+        font-size: 61px;
+        font-weight: 700;
+        line-height: 120%;
+    }
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    .add-task {
+        background-color: rgba(42, 54, 71, 255);
+        border-radius: 8px;
+        color: white;
+        transition: 75ms ease-in-out;
+        display: flex;
+        gap: 0.25rem;
+        align-items: center;
+        border: unset;
+        padding: 0.5rem;
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+
+.searchbar {
+    position: relative;
+    padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    border-radius: 8px;
+    background-color: white;
+
+
+    input {
+        background-color: white;
+        border: none;
+        height: 100%;
+        width: 100%;
+        outline: none;
+    }
+
+    .search-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+app-droparea {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+

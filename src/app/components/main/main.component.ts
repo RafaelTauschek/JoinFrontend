@@ -10,6 +10,7 @@ import { HeaderComponent } from '../header/header.component';
 import { ContactsComponent } from '../contacts/contacts.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AddTaskComponent } from '../add-task/add-task.component';
+import { SummaryComponent } from '../summary/summary.component';
 
 @Component({
   selector: 'app-main',
@@ -18,16 +19,18 @@ import { AddTaskComponent } from '../add-task/add-task.component';
     RouterOutlet, SidebarComponent, 
     BoardComponent, HeaderComponent, 
     ContactsComponent, MatSidenavModule,
-    AddTaskComponent
+    AddTaskComponent, SummaryComponent
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
 export class MainComponent {
-
+  selectedComponent: string = 'board';
 
   constructor() { }
 
-
+  onComponentSelect(component: string): void {
+    this.selectedComponent = component
+  }
 
 }

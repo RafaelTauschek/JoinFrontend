@@ -1,0 +1,52 @@
+.board-droparea {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 2rem;
+    min-height: 300px;
+}
+
+.dragarea {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-height: 300px;
+}
+
+.single-task {
+    background-color: white;
+    border-radius: 30px;
+    min-width: 125px;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    margin-bottom: 0.5rem;
+    box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
+
+
+    .title {
+        font-weight: bold;
+        margin: 0.5rem;
+    }
+
+    .description {
+        margin: 0.5rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        overflow-wrap: anywhere;
+    }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.droptitle {
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: #42526e;
+}

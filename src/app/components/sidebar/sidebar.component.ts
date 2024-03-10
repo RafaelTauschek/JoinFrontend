@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ButtonComponent } from './components/button/button.component';
 
 
@@ -10,5 +10,10 @@ import { ButtonComponent } from './components/button/button.component';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
+  @Output() componentSelected = new EventEmitter<string>();
+
+  selectComponent(component: string): void {
+    this.componentSelected.emit(component)
+  }
 
 }

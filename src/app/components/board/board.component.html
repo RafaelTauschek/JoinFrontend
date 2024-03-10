@@ -1,1 +1,19 @@
-<div *ngFor="let task of tasks">{{task}}</div>
+<div class="board">
+    <div class="board-header">
+        <span class="title">Board</span>
+        <div class="header-content">
+            <div class="searchbar">
+                <input type="text" placeholder="Find task">
+                <div class="search-icon">
+                    <img src="../../../assets/img/search2.svg" alt="search">
+                </div>
+            </div>
+            <button class="add-task">
+                <span>Add Task</span>
+                <span>+</span>
+            </button>
+        </div>
+
+    </div>
+    <app-droparea></app-droparea>
+</div>

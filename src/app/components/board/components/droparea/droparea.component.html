@@ -1,0 +1,50 @@
+<div class="board-droparea">
+    <!-- Todo Column -->
+    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todoTasks" class="dragarea todo" (cdkDropListDropped)="drop($event)">
+        <div class="header">
+            <span class="droptitle">To-Do</span>
+            <img src="../../../../../assets/img/plusButton.svg" alt="add">
+        </div>
+        <div class="single-task" *ngFor="let task of todoTasks" cdkDrag>
+            <div class="category">{{ task.category }}</div>
+            <div class="title">{{ task.title }}</div>
+            <div class="description">{{ task.description }}</div>
+        </div>
+    </div>
+
+    <!-- In Progress Column -->
+    <div cdkDropList #inProgressList="cdkDropList" [cdkDropListData]="inProgressTask" class="dragarea in-progress" (cdkDropListDropped)="drop($event)">
+        <div class="header">
+            <span class="droptitle">In Progress</span>
+            <img src="../../../../../assets/img/plusButton.svg" alt="add">
+        </div>
+        <div class="single-task" *ngFor="let task of inProgressTask" cdkDrag>
+            <div class="category">{{ task.category }}</div>
+            <div class="title">{{ task.title }}</div>
+            <div class="description">{{ task.description }}</div>
+        </div>
+    </div>
+
+    <!-- Awaiting Feedback Column -->
+    <div cdkDropList #awaitingFeedbackList="cdkDropList" [cdkDropListData]="awaitingFeedbackTask" class="dragarea await-feedback" (cdkDropListDropped)="drop($event)">
+        <div class="header">
+            <span class="droptitle">Awaiting Feedback</span>
+            <img src="../../../../../assets/img/plusButton.svg" alt="add">
+        </div>
+        <div class="single-task" *ngFor="let task of awaitingFeedbackTask" cdkDrag>
+            <div class="category">{{ task.category }}</div>
+            <div class="title">{{ task.title }}</div>
+            <div class="description">{{ task.description }}</div>
+        </div>
+    </div>
+
+    <!-- Done Column -->
+    <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="doneTasks" class="dragarea done" (cdkDropListDropped)="drop($event)">
+        <span class="droptitle">Done</span>
+        <div class="single-task" *ngFor="let task of doneTasks" cdkDrag>
+            <div class="category">{{ task.category }}</div>
+            <div class="title">{{ task.title }}</div>
+            <div class="description">{{ task.description }}</div>
+        </div>
+    </div>
+</div>

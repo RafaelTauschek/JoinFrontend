@@ -1,14 +1,97 @@
 .add-task-section {
     display: flex;
     flex-direction: column;
+    gap: 2rem;
+}
 
+.title {
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 120%;
+}
 
-    form {
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-main {
+    display: flex;
+    gap: 2rem;
+
+    .left {
         display: flex;
         flex-direction: column;
-        gap: 10px;
-        padding: 15px;
-        border-radius: 30px;
-        width: 500px;
+        gap: 1rem;
     }
+
+    .right {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+input,
+select,
+textarea {
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+    cursor: pointer;
+    padding: 13px 21px;
+    width: 422px;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 20px;
+    line-height: 120%;
+}
+
+.form-prio {
+    display: flex;
+    justify-content: space-between;
+}
+
+.prio-btn {
+    background-color: white;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 18px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    width: 136px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 120%;
+    border: none;
+}
+
+
+.seperator {
+    width: 1px;
+    background-color: white;
+    height: 400px;
+}
+
+.input-label {
+    font-size: 20px;
+    line-height: 120%;
+    font-weight: 400;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
+    padding-right: 120px;
 }

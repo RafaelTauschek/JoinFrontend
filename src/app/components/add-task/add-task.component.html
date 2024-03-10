@@ -1,11 +1,59 @@
 <div class="add-task-section">
+
+    <span class="title">Add Task</span>
+
     <form (ngSubmit)="addTask()">
-        <input [(ngModel)]="title" type="text" name="title" placeholder="title">
-        <input [(ngModel)]="description" type="text" name="description" placeholder="description">
-        <input [(ngModel)]="due_date" type="datetime" name="due_date" placeholder="due_date">
-        <input [(ngModel)]="prio" type="text" name="prio" placeholder="prio">
-        <input [(ngModel)]="status" type="text" name="status" placeholder="status">
-        <input [(ngModel)]="category" type="text" name="category" placeholder="category">
-        <button type="submit">Add Task</button>
+        <div class="form-main">
+            <div class="left">
+                <div class="form-input">
+                    <span class="input-label">Title</span>
+                    <input [(ngModel)]="title" type="text" name="title" placeholder="title">
+                </div>
+                <div class="form-textarea">
+                    <span class="input-label">Description</span>
+                    <textarea [(ngModel)]="description" name="description" id="" cols="30" rows="10" placeholder="description"></textarea>
+                </div>
+
+                <div class="form-input">
+                    <span class="input-label">Assigned to</span>
+                    <select name="assignedTo" [(ngModel)]="assignedTo">Select users to assign</select>
+                </div>
+            </div>
+    
+            <div class="seperator"></div>
+    
+            <div class="right">
+                <div class="form-input">
+                    <span class="input-label">Due date</span>
+                    <input [(ngModel)]="due_date" type="date" name="due_date" placeholder="due_date">
+                </div>
+                <div class="form-prio">
+                  <button class="prio-btn">
+                    <span>Low</span>
+                    <img src="../../../assets/img/prio_low_color.png" alt="prio-low">
+                  </button>
+                  <button class="prio-btn">
+                    <span>Medium</span>
+                    <img src="../../../assets/img/prio_medium_color.png" alt="prio-medium">
+                </button>
+                  <button class="prio-btn">
+                    <span>Urgent</span>
+                    <img src="../../../assets/img/prio_urgent_color.png" alt="prio-urgent">
+                  </button>
+                </div>
+                <div class="form-select">
+                    <span class="input-label">Category</span>
+                    <select name="category" [(ngModel)]="category" placeholder="Select category"></select>
+                </div>
+                <div class="form-input">
+                    <span class="input-label">Subtasks</span>
+                    <input type="text" placeholder="Add new subtask">
+                </div>
+            </div>
+        </div>
+        <div class="btn-container">
+            <button type="reset">Clear</button>
+            <button type="submit">Create Task</button>
+        </div>
     </form>
 </div>

@@ -12,13 +12,11 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       const token = localStorage.getItem('token');
-
       if (token) {
         req = req.clone({
           setHeaders: { Authorization: `Token ${token}`}
         })
       }
-
       return next.handle(req).pipe(
         catchError((err) => {
           if (err instanceof HttpErrorResponse) {

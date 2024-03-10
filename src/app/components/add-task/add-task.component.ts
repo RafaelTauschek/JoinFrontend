@@ -20,6 +20,7 @@ export class AddTaskComponent {
   prio: string = '';
   status: string = '';
   category: string = '';
+  assignedTo: [] = []
 
   constructor(private http: HttpClient) {
 
@@ -39,11 +40,10 @@ export class AddTaskComponent {
       category: this.category,
     })
     try {
-      console.log('Task created:', task);
       let resp = await this.postTasks(task);
       console.log(resp)
     } catch (e) {
-      console.log(e)
+      console.error(e)
     }
   }
 

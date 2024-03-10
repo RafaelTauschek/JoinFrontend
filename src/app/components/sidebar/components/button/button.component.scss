@@ -7,6 +7,16 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px;
-    width: 100%;
+    padding: 8px 8px 8px 30px;
+    width: cacl(100% - padding);
+    cursor: pointer;
+
+    span {
+        color: white;
+        font-size: 18px;
+    }
+
+    &:hover {
+        background-color: $color-darkgrey;
+    }
 }
