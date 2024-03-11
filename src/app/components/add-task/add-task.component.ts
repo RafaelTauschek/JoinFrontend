@@ -23,7 +23,7 @@ export class AddTaskComponent {
   assignedTo: [] = []
 
   constructor(private http: HttpClient) {
-
+    this.testTask()
   }
 
 
@@ -47,12 +47,29 @@ export class AddTaskComponent {
     }
   }
 
+  testTask() {
+    console.log('Test task started');
+    const url = environment.baseUrl + '/tasks/';
+    const body = {
+      title: "Test",
+      description: "Test",
+      due_date: "2024-03-27",
+      prio: "L",
+      status: "TODO",
+    }
+    try {
+      let resp = lastValueFrom(this.http.post(url, body));
+      console.log(resp);
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
 
   async postTasks(task: any) {
     const url = environment.baseUrl + '/tasks/';
     const body = task.toJSON()
     console.log('Body',  body);
-    
     return lastValueFrom(this.http.post(url, body));
   }
 

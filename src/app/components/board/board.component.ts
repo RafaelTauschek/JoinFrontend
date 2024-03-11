@@ -49,26 +49,6 @@ export class BoardComponent implements OnInit {
     console.log('FEEDBACK', this.awaitingFeedbackTask);
     console.log('DONE', this.doneTasks);
   }
-
-
-  drop(event: CdkDragDrop<Task[]>) {
-    if (event.previousContainer === event.container) {
-      console.log(event.container.data);
-    } else {
-      console.log('Second');
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
-  }
-
-
-
-
-
 }
 
 

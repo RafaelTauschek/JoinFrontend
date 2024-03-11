@@ -26,7 +26,6 @@ export class DataService {
     const url = environment.baseUrl + '/tasks/';
     try {
       const resp = await lastValueFrom(this.http.get(url)) as Array<TaskInterface>;
-      console.log('Http Response:', resp);
       const tasks = resp.map((taskData: TaskInterface) => new Task(taskData));
       this.tasksSignal.set(tasks);
       console.log(tasks)
