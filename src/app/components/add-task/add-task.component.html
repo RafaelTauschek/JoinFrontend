@@ -11,7 +11,8 @@
                 </div>
                 <div class="form-textarea">
                     <span class="input-label">Description</span>
-                    <textarea [(ngModel)]="description" name="description" id="" cols="30" rows="10" placeholder="description"></textarea>
+                    <textarea [(ngModel)]="description" name="description" id="" cols="30" rows="10"
+                        placeholder="description"></textarea>
                 </div>
 
                 <div class="form-input">
@@ -19,31 +20,38 @@
                     <select name="assignedTo" [(ngModel)]="assignedTo">Select users to assign</select>
                 </div>
             </div>
-    
+
             <div class="seperator"></div>
-    
+
             <div class="right">
                 <div class="form-input">
                     <span class="input-label">Due date</span>
                     <input [(ngModel)]="due_date" type="date" name="due_date" placeholder="due_date">
                 </div>
                 <div class="form-prio">
-                  <button type="button" class="prio-btn">
-                    <span>Low</span>
-                    <img src="../../../assets/img/prio_low_color.png" alt="prio-low">
-                  </button>
-                  <button class="prio-btn" type="button">
-                    <span>Medium</span>
-                    <img src="../../../assets/img/prio_medium_color.png" alt="prio-medium">
-                </button>
-                  <button class="prio-btn" type="button">
-                    <span>Urgent</span>
-                    <img src="../../../assets/img/prio_urgent_color.png" alt="prio-urgent">
-                  </button>
+                    <button type="button" class="prio-btn" (click)="selectPriority('L')"
+                        [class.prio-low]="prio === 'L'">
+                        <span>Low</span>
+                        <img src="../../../assets/img/prio_low_color.png" alt="prio-low">
+                    </button>
+                    <button class="prio-btn" type="button" (click)="selectPriority('M')"
+                        [class.prio-medium]="prio === 'M'">
+                        <span>Medium</span>
+                        <img src="../../../assets/img/prio_medium_color.png" alt="prio-medium">
+                    </button>
+                    <button class="prio-btn" type="button" (click)="selectPriority('U')"
+                        [class.prio-urgent]="prio === 'U'">
+                        <span>Urgent</span>
+                        <img src="../../../assets/img/prio_urgent_color.png" [src] alt="prio-urgent">
+                    </button>
                 </div>
                 <div class="form-select">
                     <span class="input-label">Category</span>
-                    <select name="category" [(ngModel)]="category" placeholder="Select category"></select>
+                    <select name="category" [(ngModel)]="category" placeholder="Select category">
+                        @for (category of categorys; track $index) {
+                        <option class="category-option" [value]="category.id">{{ category.name }}</option>
+                        }
+                    </select>
                 </div>
                 <div class="form-input">
                     <span class="input-label">Subtasks</span>

@@ -5,7 +5,7 @@ import { Contact } from '../models/model.class';
 import { Subtask } from '../models/subtask.calss';
 import { Category } from '../models/category.class';
 import { environment } from '../../environments/environment';
-import { lastValueFrom } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
 import { TaskInterface } from '../interfaces/task.interface';
 import { ContactInterface } from '../interfaces/contact.interface';
 import { SubtaskInterface } from '../interfaces/subtask.interface';
@@ -20,6 +20,7 @@ export class DataService {
   public contactsSignal: WritableSignal<Contact[]> = signal<Contact[]>([]);
   public subtasksSignal: WritableSignal<Subtask[]> = signal<Subtask[]>([]);
   public categorySignal: WritableSignal<Category[]> = signal<Category[]>([]);
+  public users: Object = {}
 
 
   async getTasks() {
@@ -57,14 +58,21 @@ export class DataService {
     }
   }
 
-  async getCategorys() {
+  getCategorys(): Observable<Category[]> {
     const url = environment.baseUrl + '/categorys/';
+    return this.http.get<Category[]>(url)
+  }
+
+  async getUsers() {
+    const url = environment.baseUrl + '/users/';
     try {
-      const resp = await lastValueFrom(this.http.get(url)) as Array<CategoryInterface>;
-      const categorys = resp.map((categoryData: CategoryInterface) => new Category(categoryData));
-      this.categorySignal.set(categorys);
-    } catch (e) {
-      console.error(e); 
+      const resp = await lastValueFrom(this.http.get(url));
+      this.users = resp;
+      console.log(this.users);
+    } catch(e) {
+      console.error(e);
     }
   }
+
+
 }

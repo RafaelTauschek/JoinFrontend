@@ -6,7 +6,7 @@
             <img src="../../../../../assets/img/plusButton.svg" alt="add">
         </div>
         <div class="single-task" *ngFor="let task of todoTasks" cdkDrag>
-            <div class="category">{{ task.category }}</div>
+            <div [ngStyle]="{'background': getCategoryColor(task.category)}" class="category">{{ getCategoryName(task.category) }}</div>
             <div class="title">{{ task.title }}</div>
             <div class="description">{{ task.description }}</div>
         </div>
@@ -19,7 +19,7 @@
             <img src="../../../../../assets/img/plusButton.svg" alt="add">
         </div>
         <div class="single-task" *ngFor="let task of inProgressTask" cdkDrag>
-            <div class="category">{{ task.category }}</div>
+            <div [ngStyle]="{'background': getCategoryColor(task.category)}" class="category">{{ getCategoryName(task.category) }}</div>
             <div class="title">{{ task.title }}</div>
             <div class="description">{{ task.description }}</div>
         </div>
@@ -32,7 +32,7 @@
             <img src="../../../../../assets/img/plusButton.svg" alt="add">
         </div>
         <div class="single-task" *ngFor="let task of awaitingFeedbackTask" cdkDrag>
-            <div class="category">{{ task.category }}</div>
+            <div [ngStyle]="{'background': getCategoryColor(task.category)}" class="category">{{ getCategoryName(task.category) }}</div>
             <div class="title">{{ task.title }}</div>
             <div class="description">{{ task.description }}</div>
         </div>
@@ -42,7 +42,7 @@
     <div cdkDropList id="done" #doneList="cdkDropList" [cdkDropListData]="doneTasks" class="dragarea done" (cdkDropListDropped)="drop($event)">
         <span class="droptitle">Done</span>
         <div class="single-task" *ngFor="let task of doneTasks" cdkDrag>
-            <div class="category">{{ task.category }}</div>
+            <div [ngStyle]="{'background': getCategoryColor(task.category)}" class="category">{{ getCategoryName(task.category) }}</div>
             <div class="title">{{ task.title }}</div>
             <div class="description">{{ task.description }}</div>
         </div>

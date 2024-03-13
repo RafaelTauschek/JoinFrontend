@@ -1,13 +1,12 @@
-import { Component, effect, inject } from '@angular/core';
-import { CdkDragDrop, DragDrop, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Component, OnInit, effect, inject } from '@angular/core';
+import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Task } from '../../../../models/task.class';
 import { DataService } from '../../../../services/data.service';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef } from '@angular/core';
-import { environment } from '../../../../../environments/environment';
-import { lastValueFrom } from 'rxjs';
-import { TaskInterface } from '../../../../interfaces/task.interface';
+import { Category } from '../../../../models/category.class';
+
+
 
 @Component({
   selector: 'app-droparea',
@@ -16,17 +15,39 @@ import { TaskInterface } from '../../../../interfaces/task.interface';
   templateUrl: './droparea.component.html',
   styleUrl: './droparea.component.scss'
 })
-export class DropareaComponent {
+export class DropareaComponent implements OnInit {
   public todoTasks: Task[] = [];
   public inProgressTask: Task[] = [];
   public awaitingFeedbackTask: Task[] = [];
-  public doneTasks: Task[] = []
+  public doneTasks: Task[] = [];
+  public users: [] = [];
   public data = inject(DataService);
   public http = inject(HttpClient);
+  public categorys: Category[] = [];
 
-  constructor(private cdr: ChangeDetectorRef) {
+
+  constructor() {
     this.data.getTasks();
-    effect(() => this.filterTasks(this.data.tasksSignal()))
+    this.data.getUsers();
+    effect(() => this.filterTasks(this.data.tasksSignal()));
+  }
+
+  ngOnInit(): void {
+    this.data.getCategorys().subscribe((categorys) => {
+      this.categorys = categorys;
+    });
+  }
+
+
+  getCategoryName(id: number) {
+    let category = this.categorys.find((category: Category) => category.id === id);
+    console.log('Id recieved: ', id, 'category: ', category);
+    return category?.name
+  }
+
+  getCategoryColor(id: number) {
+    let category = this.categorys.find((category: Category) => category.id === id);
+    return category?.color
   }
 
 
@@ -36,6 +57,7 @@ export class DropareaComponent {
     this.awaitingFeedbackTask = tasks.filter((task: Task) => task.status === 'FEEDBACK');
     this.doneTasks = tasks.filter((task: Task) => task.status === 'DONE');
   }
+
 
   drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
@@ -58,15 +80,6 @@ export class DropareaComponent {
 
 
   updateTask(task: any, id: string) {
-    console.log('Task recieved: ', task);   //Empty array with object inside?
-    console.log(Array.isArray(task)) // true
-    console.log(task[0])   //undefined
-    
-    
-    
-
-
-
     // const url = environment.baseUrl + '/tasks/' + '' + '/';
     // console.log(url);
     // const updatedTask = new Task({
@@ -79,8 +92,6 @@ export class DropareaComponent {
     //   assigned_to: task[0].assigned_to,
     // })
     // console.log('updated Task: ', updatedTask);
-    
-
     // try {
     //   let resp = lastValueFrom(this.http.patch(url, updatedTask.toJSON()))
     //   console.log(resp);

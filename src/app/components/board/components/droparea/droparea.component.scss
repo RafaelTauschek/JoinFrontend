@@ -24,6 +24,14 @@
     box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
 
 
+    .category {
+        color: white;
+        border-radius: 0.5rem;
+        padding: 0.4rem;
+        width: min-content;
+        font-size: 16px;
+    }
+
     .title {
         font-weight: bold;
         margin: 0.5rem;

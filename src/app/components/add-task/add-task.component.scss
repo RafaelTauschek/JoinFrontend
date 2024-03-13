@@ -95,3 +95,22 @@ textarea {
     gap: 2rem;
     padding-right: 120px;
 }
+
+.prio-low {
+    background-color: #7ae229;
+    color: white;
+}
+
+.prio-medium {
+    background-color: #ffa800;
+    color: white;
+}
+
+.prio-urgent {
+    background-color: #ff3d00;
+    color: white;
+}
+
+.category-option {
+    padding: 3px;
+}

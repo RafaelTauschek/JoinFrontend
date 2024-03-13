@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../../environments/environment';
 import { lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Task } from '../../models/task.class'; 
+import { Task } from '../../models/task.class';
+import { Category } from '../../models/category.class';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-add-task',
@@ -13,24 +15,33 @@ import { Task } from '../../models/task.class';
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
-export class AddTaskComponent {
+export class AddTaskComponent implements OnInit {
   title: string = '';
   description: string = '';
   due_date: Date | null = null;
-  prio: string = '';
   status: string = '';
   category: string = '';
-  assignedTo: [] = []
+  assignedTo: [] = [];
+  prio: string = '';
+  activeImage: string = '';
+  categorys: Category[] = [];
 
-  constructor(private http: HttpClient) {
-    this.testTask()
+  constructor(private http: HttpClient, private data: DataService) { }
+
+  ngOnInit(): void {
+    this.data.getCategorys().subscribe((category) => {
+      this.categorys = category;
+    });
+    setTimeout(() => {
+      console.log(this.categorys);
+    }, 500);
   }
 
 
-
-
-  
   async addTask() {
+    if (this.status == '') {
+      this.status = 'TODO';
+    }
     let task = new Task({
       title: this.title,
       description: this.description,
@@ -47,29 +58,13 @@ export class AddTaskComponent {
     }
   }
 
-  testTask() {
-    console.log('Test task started');
-    const url = environment.baseUrl + '/tasks/';
-    const body = {
-      title: "Test",
-      description: "Test",
-      due_date: "2024-03-27",
-      prio: "L",
-      status: "TODO",
-    }
-    try {
-      let resp = lastValueFrom(this.http.post(url, body));
-      console.log(resp);
-    } catch (e) {
-      console.error(e)
-    }
-  }
+
 
 
   async postTasks(task: any) {
     const url = environment.baseUrl + '/tasks/';
     const body = task.toJSON()
-    console.log('Body',  body);
+    console.log('Body', body);
     return lastValueFrom(this.http.post(url, body));
   }
 
@@ -78,4 +73,17 @@ export class AddTaskComponent {
     const body = JSON.stringify(task)
     return lastValueFrom(this.http.put(url, body));
   }
+
+
+  selectPriority(prio: string) {
+    if (this.prio == prio) {
+      this.prio = ''
+    } else {
+      this.prio = prio;
+    }
+  }
+
+
+
+
 }
