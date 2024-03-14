@@ -35,17 +35,23 @@ export class DataService {
     }
   }
 
-  async getContacts() {
+  // async getContacts() {
+  //   const url = environment.baseUrl + '/contacts/';
+  //   try {
+  //     const resp = await lastValueFrom(this.http.get(url)) as Array<ContactInterface>;
+  //     const contacts = resp.map((contactData: ContactInterface) => new Contact(contactData));
+  //     this.contactsSignal.set(contacts);
+  //     console.log(contacts);
+  //   } catch(e) {
+  //     console.error(e);
+  //   }
+  // }
+
+  getContacts(): Observable<Contact[]> {
     const url = environment.baseUrl + '/contacts/';
-    try {
-      const resp = await lastValueFrom(this.http.get(url)) as Array<ContactInterface>;
-      const contacts = resp.map((contactData: ContactInterface) => new Contact(contactData));
-      this.contactsSignal.set(contacts);
-      console.log(contacts);
-    } catch(e) {
-      console.error(e);
-    }
+    return this.http.get<Contact[]>(url);
   }
+
 
   async getSubtasks() {
     const url = environment.baseUrl + '/subtasks/';
@@ -74,5 +80,10 @@ export class DataService {
     }
   }
 
+
+  getTasksTest(): Observable<Task[]> {
+    const url = environment.baseUrl + '/tasks/';
+    return this.http.get<Task[]>(url)
+  }
 
 }

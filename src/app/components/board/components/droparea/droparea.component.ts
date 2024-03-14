@@ -5,6 +5,8 @@ import { DataService } from '../../../../services/data.service';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Category } from '../../../../models/category.class';
+import { environment } from '../../../../../environments/environment';
+import { last, lastValueFrom } from 'rxjs';
 
 
 
@@ -24,24 +26,31 @@ export class DropareaComponent implements OnInit {
   public data = inject(DataService);
   public http = inject(HttpClient);
   public categorys: Category[] = [];
-
+  public tasktest: Task[] = []
 
   constructor() {
     this.data.getTasks();
     this.data.getUsers();
-    effect(() => this.filterTasks(this.data.tasksSignal()));
+    // effect(() => this.filterTasks(this.data.tasksSignal()));
+
   }
 
   ngOnInit(): void {
     this.data.getCategorys().subscribe((categorys) => {
       this.categorys = categorys;
     });
+
+    this.data.getTasksTest().subscribe((tasks) => {
+      this.filterTasks(tasks);
+      console.log('Updated Tasks');
+      
+    })
   }
+
 
 
   getCategoryName(id: number) {
     let category = this.categorys.find((category: Category) => category.id === id);
-    console.log('Id recieved: ', id, 'category: ', category);
     return category?.name
   }
 
@@ -52,10 +61,10 @@ export class DropareaComponent implements OnInit {
 
 
   filterTasks(tasks: Task[]) {
-    this.todoTasks = tasks.filter((task: Task) => task.status === 'TODO');
-    this.inProgressTask = tasks.filter((task: Task) => task.status === 'PROGRESS');
-    this.awaitingFeedbackTask = tasks.filter((task: Task) => task.status === 'FEEDBACK');
-    this.doneTasks = tasks.filter((task: Task) => task.status === 'DONE');
+    this.todoTasks = tasks.filter((task) => task.status === 'TODO');
+    this.inProgressTask = tasks.filter((task) => task.status === 'PROGRESS');
+    this.awaitingFeedbackTask = tasks.filter((task) => task.status === 'FEEDBACK');
+    this.doneTasks = tasks.filter((task) => task.status === 'DONE');
   }
 
 
@@ -67,36 +76,33 @@ export class DropareaComponent implements OnInit {
         event.currentIndex,
       );
     } else {
-      console.log(event.container.data);
-      this.updateTask(event.container.data, event.container.id)
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
+      this.updateTask(event.container.data, event.container.id)
     }
   }
 
 
-  updateTask(task: any, id: string) {
-    // const url = environment.baseUrl + '/tasks/' + '' + '/';
-    // console.log(url);
-    // const updatedTask = new Task({
-    //   title: task[0].title,
-    //   description: task[0].description,
-    //   due_date: task[0].due_date,
-    //   prio: task[0].prio,
-    //   status: id,
-    //   category: task[0].category,
-    //   assigned_to: task[0].assigned_to,
-    // })
-    // console.log('updated Task: ', updatedTask);
-    // try {
-    //   let resp = lastValueFrom(this.http.patch(url, updatedTask.toJSON()))
-    //   console.log(resp);
-    // } catch (e) {
-    //   console.error(e);  
-    // }
+  async updateTask(task: any, id: string) {
+    const url = environment.baseUrl + `/tasks/${task[0].id}/`;
+    const body = {
+      "status": id
+    }
+
+    try {
+      let resp = await lastValueFrom(this.http.patch(url, JSON.stringify(body)))
+      console.log(resp);
+      this.data.getTasksTest();
+    } catch (e) {
+      console.error(e);
+    }
+
+
   }
+
+
 }

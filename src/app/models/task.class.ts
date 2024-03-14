@@ -6,7 +6,7 @@ export class Task {
     status: string;
     category: number;
     assigned_to: number[] | [];
-    id: number;
+    readonly id: number;
     
     constructor(obj: any) {
         this.title = obj ? obj.title : '';
@@ -28,7 +28,6 @@ export class Task {
             status: this.status,
             category: this.category,
             assigned_to: this.assigned_to,
-            id: this.id
         }
     }
 }
