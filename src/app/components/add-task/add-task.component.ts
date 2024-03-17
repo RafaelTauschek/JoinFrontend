@@ -92,7 +92,38 @@ export class AddTaskComponent implements OnInit {
     }
   }
 
+  selectedCategory!: number;
+  categoryLabel: string | undefined = 'Select task category'
+  categoryColor: string | undefined = '#FFF'
 
 
+  selectCategory(categoryId: number) {
+    this.selectedCategory = categoryId;
+    this.categoryLabel = this.getCategoryName(categoryId);
+    this.categoryColor = this.getCategoryColor(categoryId);
+  }
+
+  categoryMenu: boolean = false;
+
+  openCategoryMenu() {
+    this.categoryMenu = !this.categoryMenu;
+  }
+
+  getCategoryName(categoryId: number) {
+    let category = this.categorys.find((category: Category) => category.id === categoryId);
+    return category?.name
+  }
+
+  getCategoryColor(categoryId: number) {
+    let category = this.categorys.find((category: Category) => category.id === categoryId);
+    return category?.color
+  }
+
+
+  assignedMenu: boolean = false;
+
+  openAssignedMenu() {
+    this.assignedMenu = !this.assignedMenu;
+  }
 
 }

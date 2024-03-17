@@ -15,13 +15,18 @@
                         placeholder="description"></textarea>
                 </div>
 
-                <div class="form-input">
-                    <span class="input-label">Assigned to</span>
-                    <select name="assignedTo" [(ngModel)]="assignedTo">
-                        @for (user of users; track $index) {
-                            <option class="user-option">{{ user.username }}</option>
-                        }
-                    </select>
+                <div class="form-input" (click)="openAssignedMenu()">
+                    <div class="assigned-container">
+                        <span class="input-label">Assigned to</span>
+                        <button>
+                            <img src="../../../assets/img/arrow_down.png" alt="dropdown">
+                        </button>
+                    </div>
+                    <div class="assigned-menu" *ngIf="assignedMenu">
+                        <div class="user-item" *ngFor="let user of users; let i = index">
+                            <span>{{ user.username }}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -33,7 +38,9 @@
                     <input [(ngModel)]="due_date" type="date" name="due_date" placeholder="due_date">
                 </div>
                 <div class="form-prio">
-                    <button type="button" class="prio-btn" (click)="selectPriority('L')"
+                    <span class="input-label">Prio</span>
+                    <div class="prio-buttons">
+                        <button type="button" class="prio-btn" (click)="selectPriority('L')"
                         [class.prio-low]="prio === 'L'">
                         <span>Low</span>
                         <img src="../../../assets/img/prio_low_color.png" alt="prio-low">
@@ -48,18 +55,30 @@
                         <span>Urgent</span>
                         <img src="../../../assets/img/prio_urgent_color.png" [src] alt="prio-urgent">
                     </button>
+                    </div>
                 </div>
-                <div class="form-select">
+                <div class="form-input" (click)="openCategoryMenu()">
                     <span class="input-label">Category</span>
-                    <select name="category" [(ngModel)]="category" placeholder="Select category">
-                        @for (category of categorys; track $index) {
-                        <option class="category-option" [value]="category.id">{{ category.name }}</option>
-                        }
-                    </select>
+                    <div class="category-container">
+                        <span>{{ categoryLabel }}</span>
+                        <button>
+                            <img src="../../../assets/img/arrow_down.png" alt="dropdown">
+                        </button>
+                    </div>
+                    <div class="category-menu" *ngIf="categoryMenu">
+                        <div *ngFor="let category of categorys; let i = index" class="category-item"
+                            (click)="selectCategory(category.id)">
+                            <span>{{ category.name }}</span>
+                            <div [ngStyle]="{'background-color': category.color}" class="category-color"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-input">
                     <span class="input-label">Subtasks</span>
-                    <input type="text" placeholder="Add new subtask">
+                    <div class="subtask-container">
+                        <span>Add new Subtask</span>
+                        <img src="../../../assets/img/plus_icon.png" alt="add subtask">
+                    </div>
                 </div>
             </div>
         </div>

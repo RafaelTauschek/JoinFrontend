@@ -18,15 +18,29 @@ export class SummaryComponent {
   public doneTasks: Task[] = [];
   public urgentTasks: Task[] = []
   public upcomingDeadline: string = ''
+  public greeting: string = '';
 
   constructor(private data: DataService) {
     this.data.getTasksTest().subscribe((tasks) => {
       this.tasks = tasks;
       this.filterTasks(tasks);
     });
-    console.log(this.tasks);
+    this.greetUser();
   }
 
+
+  greetUser() {
+    const date = new Date().getHours();
+    if (date < 10) {
+        this.greeting = 'Good morning,';
+    } else if (date < 14) {
+        this.greeting = 'Good day,';
+    } else if (date < 17) {
+        this.greeting = 'Good afternoon,';
+    } else {
+        this.greeting = 'Good evening,';
+    }
+}
 
   
   filterTasks(tasks: Task[]) {
