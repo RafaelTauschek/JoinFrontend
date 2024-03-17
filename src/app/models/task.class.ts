@@ -1,22 +1,26 @@
 export class Task {
     title: string;
     description: string;
-    due_date: Date | null;
+    due_date: string;
     prio: string;
     status: string;
     category: number;
     assigned_to: number[] | [];
     readonly id: number;
+    readonly author: string;
+    readonly created_at: string;
     
     constructor(obj: any) {
         this.title = obj ? obj.title : '';
         this.description = obj ? obj.description : '';
-        this.due_date = obj ? obj.due_date : null;
+        this.due_date = obj ? obj.due_date : '';
         this.prio = obj ? obj.prio : 'L';
         this.status = obj ? obj.status : 'TODO';
         this.category = obj ? obj.category : null;
         this.assigned_to = obj ? obj.assigned_to : [];
         this.id = obj ? obj.id : null;
+        this.author = obj ? obj.author : '';
+        this.created_at = obj ? obj.created_at : '';
     }
 
     public toJSON() {

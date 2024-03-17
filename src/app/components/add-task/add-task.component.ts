@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Task } from '../../models/task.class';
 import { Category } from '../../models/category.class';
 import { DataService } from '../../services/data.service';
+import { User } from '../../models/user.class';
 
 @Component({
   selector: 'app-add-task',
@@ -25,6 +26,7 @@ export class AddTaskComponent implements OnInit {
   prio: string = '';
   activeImage: string = '';
   categorys: Category[] = [];
+  users: User[] = []
 
   constructor(private http: HttpClient, private data: DataService) { }
 
@@ -35,6 +37,13 @@ export class AddTaskComponent implements OnInit {
     setTimeout(() => {
       console.log(this.categorys);
     }, 500);
+
+    this.data.getUsers().subscribe((users) => {
+      this.users = users;
+      console.log(this.users);
+      
+    })
+
   }
 
 

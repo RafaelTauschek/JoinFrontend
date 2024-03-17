@@ -17,7 +17,11 @@
 
                 <div class="form-input">
                     <span class="input-label">Assigned to</span>
-                    <select name="assignedTo" [(ngModel)]="assignedTo">Select users to assign</select>
+                    <select name="assignedTo" [(ngModel)]="assignedTo">
+                        @for (user of users; track $index) {
+                            <option class="user-option">{{ user.username }}</option>
+                        }
+                    </select>
                 </div>
             </div>
 

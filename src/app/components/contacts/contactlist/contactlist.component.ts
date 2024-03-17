@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DataService } from '../../../services/data.service';
-import { Contact } from '../../../models/model.class';
+import { Contact } from '../../../models/contact.class';
+import { CommonModule } from '@angular/common';
 import { ContactInterface } from '../../../interfaces/contact.interface';
 
 @Component({
   selector: 'app-contactlist',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './contactlist.component.html',
   styleUrl: './contactlist.component.scss'
 })
 export class ContactlistComponent {
-  contacts: Contact[] = []
+  contactList = new Map<string, ContactInterface[]>();
+  @Input() addContact = false;
 
   constructor(private data: DataService) {
     this.data.getContacts().subscribe((contacts) => {
@@ -21,13 +23,26 @@ export class ContactlistComponent {
 
 
   filterContacts(contacts: Contact[]) {
-    let map = new Map<string, Object>();
+    let map = new Map<string, ContactInterface[]>();
+
     contacts.forEach((contact) => {
-      console.log(typeof(contact));
       let firstName = contact.first_name.charAt(0);
-      map.set(firstName, contact);
+      if (map.has(firstName)) {
+        map.get(firstName)?.push(contact);
+      } else {
+        map.set(firstName, [contact])
+      }
     });
-    console.log(map);
+    this.contactList = map
+    console.log(this.contactList);
   }
 
+  selectContact(contact: Object) {
+    this.data.selectContact(contact as Contact)
+  }
+
+  openAddContact() {
+    // this.addContactMenu = !this.addContactMenu
+    // console.log(this.addContactMenu);
+  }
 }

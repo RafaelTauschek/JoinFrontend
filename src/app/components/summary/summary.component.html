@@ -8,21 +8,21 @@
         <div class="task-overview">
             <div class="top-section">
                 <div class="task-status">
-                    <span class="task-count">7</span>
+                    <span class="task-count">{{ tasks.length }}</span>
                     <div class="task-description">
                         <span class="task-name">Tasks in</span>
                         <span class="task-name">Board</span>
                     </div>
                 </div>
                 <div class="task-status">
-                    <span class="task-count">1</span>
+                    <span class="task-count">{{ inProgressTask.length }}</span>
                     <div class="task-description">
                         <span class="task-name">Tasks in</span>
                         <span class="task-name">Progress</span>
                     </div>
                 </div>
                 <div class="task-status">
-                    <span class="task-count">2</span>
+                    <span class="task-count">{{ awaitingFeedbackTask.length }}</span>
                     <div class="task-description">
                         <span class="task-name">Awaiting</span>
                         <span class="task-name">Feedback</span>
@@ -33,13 +33,13 @@
                 <div class="urgent-tasks">
                     <img src="../../../assets/img/prio_urgent.svg" alt="prio-urgent">
                     <div class="urgent-text">
-                        <span class="count">0</span>
+                        <span class="count">{{ urgentTasks.length }}</span>
                         <span class="title">Urgent</span>
                     </div>
                 </div>
                 <div class="seperator"></div>
                 <div class="deadline">
-                    <span class="date">September 9, 2023</span>
+                    <span class="date">{{ upcomingDeadline }}</span>
                     <span class="upcoming">Upcoming Deadline</span>
                     <span class="error">Error</span>
                 </div>
@@ -48,14 +48,14 @@
                 <div class="todo">
                     <img src="../../../assets/img/icon_pencil.svg" alt="pencil-icon">
                     <div class="todo-content">
-                        <span class="count">2</span>
+                        <span class="count">{{ todoTasks.length }}</span>
                         <span class="title">To-Do</span>
                     </div>
                 </div>
                 <div class="done">
                     <img src="../../../assets/img/icon_ok.svg" alt="ok-icon">
                     <div class="done-content">
-                        <span class="count">2</span>
+                        <span class="count">{{ doneTasks.length }}</span>
                         <span class="title">Done</span>
                     </div>
                 </div>

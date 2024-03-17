@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, WritableSignal, inject, signal } from '@angular/core';
 import { Task } from '../models/task.class';
-import { Contact } from '../models/model.class';
+import { Contact } from '../models/contact.class';
 import { Subtask } from '../models/subtask.calss';
 import { Category } from '../models/category.class';
 import { environment } from '../../environments/environment';
-import { Observable, lastValueFrom } from 'rxjs';
+import { BehaviorSubject, Observable, lastValueFrom } from 'rxjs';
 import { TaskInterface } from '../interfaces/task.interface';
 import { ContactInterface } from '../interfaces/contact.interface';
 import { SubtaskInterface } from '../interfaces/subtask.interface';
 import { CategoryInterface } from '../interfaces/category.interface';
+import { User } from '../models/user.class';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,8 @@ export class DataService {
   public subtasksSignal: WritableSignal<Subtask[]> = signal<Subtask[]>([]);
   public categorySignal: WritableSignal<Category[]> = signal<Category[]>([]);
   public users: Object = {}
+  private selectedContactSubject: BehaviorSubject<Contact | null> = new BehaviorSubject<Contact | null>(null);
+  selectedContact$: Observable<Contact | null> = this.selectedContactSubject.asObservable();
 
 
   async getTasks() {
@@ -35,17 +38,11 @@ export class DataService {
     }
   }
 
-  // async getContacts() {
-  //   const url = environment.baseUrl + '/contacts/';
-  //   try {
-  //     const resp = await lastValueFrom(this.http.get(url)) as Array<ContactInterface>;
-  //     const contacts = resp.map((contactData: ContactInterface) => new Contact(contactData));
-  //     this.contactsSignal.set(contacts);
-  //     console.log(contacts);
-  //   } catch(e) {
-  //     console.error(e);
-  //   }
-  // }
+  selectContact(contact: Contact) {
+    this.selectedContactSubject.next(contact);
+  }
+
+
 
   getContacts(): Observable<Contact[]> {
     const url = environment.baseUrl + '/contacts/';
@@ -69,15 +66,20 @@ export class DataService {
     return this.http.get<Category[]>(url)
   }
 
-  async getUsers() {
+  // async getUsers() {
+  //   const url = environment.baseUrl + '/users/';
+  //   try {
+  //     const resp = await lastValueFrom(this.http.get(url));
+  //     this.users = resp;
+  //     console.log(this.users);
+  //   } catch(e) {
+  //     console.error(e);
+  //   }
+  // }
+
+  getUsers(): Observable<User[]> {
     const url = environment.baseUrl + '/users/';
-    try {
-      const resp = await lastValueFrom(this.http.get(url));
-      this.users = resp;
-      console.log(this.users);
-    } catch(e) {
-      console.error(e);
-    }
+    return this.http.get<User[]>(url)
   }
 
 

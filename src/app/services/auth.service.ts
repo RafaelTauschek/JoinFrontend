@@ -16,6 +16,8 @@ export class AuthService {
       "username": username,
       "password": password
     }
+    console.log(url, body);
+    
     return lastValueFrom(this.http.post(url, body));
   }
 }

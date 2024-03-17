@@ -13,7 +13,7 @@
                 <span>LT</span>
             </div>
             <div class="user-content">
-                <span class="username">Laura Tena</span>
+                <span class="username">{{ this.selectedContact?.first_name + ' ' + this.selectedContact?.last_name }}</span>
                 <div class="user-option">
                     <div class="edit">
                         <img src="../../../assets/img/icon_contact_edit.svg" alt="edit">
@@ -30,15 +30,19 @@
             Contact Information
             <div class="email">
                 <span>Email</span>
-                <a href="mailto:email">laura-tena&#64;mail.de</a>
+                <a href="mailto:email">{{ this.selectedContact?.email }}</a>
             </div>
             <div class="phone">
                 <span>Phone</span>
-                <a href="tel:number">0178654825</a>
+                <a href="tel:number">{{ this.selectedContact?.phone_number }}</a>
             </div>
         </div>
     </div>
 </div>
+
+
+<app-add-contact *ngIf="addContactMenu"></app-add-contact>
+
 
 
 

@@ -1,0 +1,32 @@
+<div class="add-contact">
+
+
+
+
+
+<form (ngSubmit)="addContact()"></form>
+    <div class="user-input">
+        <input [(ngModel)]="name" type="text" placeholder="Name">
+        <img src="../../../../assets/img/person.svg" alt="name">
+    </div>
+    <div class="user-input">
+        <input [(ngModel)]="email" type="email" placeholder="Email">
+        <img src="" alt="email">
+    </div>
+    <div class="user-input">
+        <input [(ngModel)]="phone" type="tel" placeholder="Phone">
+        <img src="" alt="phone">
+    </div>
+
+</div>
+
+
+
+
+
+<!-- first_name: string;
+last_name: string;
+short_name: string;
+email: string;
+phone_number: number;
+color: string; -->

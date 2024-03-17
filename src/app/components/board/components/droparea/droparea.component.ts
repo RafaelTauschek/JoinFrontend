@@ -42,8 +42,6 @@ export class DropareaComponent implements OnInit {
 
     this.data.getTasksTest().subscribe((tasks) => {
       this.filterTasks(tasks);
-      console.log('Updated Tasks');
-      
     })
   }
 
@@ -94,7 +92,7 @@ export class DropareaComponent implements OnInit {
     }
 
     try {
-      let resp = await lastValueFrom(this.http.patch(url, JSON.stringify(body)))
+      let resp = await lastValueFrom(this.http.patch(url, body));
       console.log(resp);
       this.data.getTasksTest();
     } catch (e) {
