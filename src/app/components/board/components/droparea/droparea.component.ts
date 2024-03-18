@@ -66,7 +66,7 @@ export class DropareaComponent implements OnInit {
   }
 
 
-  drop(event: CdkDragDrop<Task[]>) {
+  async drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -80,7 +80,7 @@ export class DropareaComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-      this.updateTask(event.container.data, event.container.id)
+       await this.updateTask(event.container.data, event.container.id)
     }
   }
 

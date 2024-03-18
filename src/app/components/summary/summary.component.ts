@@ -19,6 +19,7 @@ export class SummaryComponent {
   public urgentTasks: Task[] = []
   public upcomingDeadline: string = ''
   public greeting: string = '';
+  public error: string = '';
 
   constructor(private data: DataService) {
     this.data.getTasksTest().subscribe((tasks) => {
@@ -59,15 +60,27 @@ export class SummaryComponent {
     const nextDeadlineTask: Task | undefined = sortedTasks[0];
     if (nextDeadlineTask) {
       this.formatDeadline(nextDeadlineTask.due_date);
-      
     } else {
       console.log('No tasks found');
     }
   }
 
   formatDeadline(deadline: string) {
+    if (!this.validateDeadline(deadline)) {
+      this.error = '(Your last deadline is expired!)'
+    }
     const formatedDeadline = new Date(deadline).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
     this.upcomingDeadline = formatedDeadline;
+  }
+
+  validateDeadline(deadline: string) {
+    const deadlineDate = new Date(deadline);
+    const currentDate = new Date();
+    if (deadlineDate < currentDate) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
 }

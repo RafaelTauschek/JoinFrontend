@@ -26,7 +26,12 @@ export class AddTaskComponent implements OnInit {
   prio: string = '';
   activeImage: string = '';
   categorys: Category[] = [];
-  users: User[] = []
+  users: User[] = [];
+  
+  selectedCategory!: number;
+  categoryLabel: string | undefined = 'Select task category'
+  categoryColor: string | undefined = '#FFF'
+
 
   constructor(private http: HttpClient, private data: DataService) { }
 
@@ -57,7 +62,7 @@ export class AddTaskComponent implements OnInit {
       due_date: this.due_date,
       prio: this.prio,
       status: this.status,
-      category: this.category,
+      category: this.selectedCategory,
     })
     try {
       let resp = await this.postTasks(task);
@@ -91,10 +96,6 @@ export class AddTaskComponent implements OnInit {
       this.prio = prio;
     }
   }
-
-  selectedCategory!: number;
-  categoryLabel: string | undefined = 'Select task category'
-  categoryColor: string | undefined = '#FFF'
 
 
   selectCategory(categoryId: number) {
