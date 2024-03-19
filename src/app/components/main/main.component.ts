@@ -25,7 +25,7 @@ import { SummaryComponent } from '../summary/summary.component';
   styleUrl: './main.component.scss'
 })
 export class MainComponent {
-  selectedComponent: string = 'board';
+  selectedComponent: string = 'summary';
 
   constructor() { }
 

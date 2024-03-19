@@ -8,33 +8,35 @@
             <div class="seperator"></div>
             <span class="description">Better with a team</span>
         </div>
-        <div class="contact-header">
-            <div class="user-acronym">
-                <span>LT</span>
-            </div>
-            <div class="user-content">
-                <span class="username">{{ this.selectedContact?.first_name + ' ' + this.selectedContact?.last_name }}</span>
-                <div class="user-option">
-                    <div class="edit">
-                        <img src="../../../assets/img/icon_contact_edit.svg" alt="edit">
-                        <span>Edit</span>
-                    </div>
-                    <div class="delete">
-                        <img src="../../../assets/img/icon_contact_delete.svg" alt="delete">
-                        <span>Delete</span>
+        <div class="contact-wrapper" *ngIf="this.selectedContact">
+            <div class="contact-header">
+                <div class="user-acronym">
+                    <span>LT</span>
+                </div>
+                <div class="user-content">
+                    <span class="username">{{ this.selectedContact.first_name + ' ' + this.selectedContact.last_name }}</span>
+                    <div class="user-option">
+                        <div class="edit">
+                            <img src="../../../assets/img/icon_contact_edit.svg" alt="edit">
+                            <span>Edit</span>
+                        </div>
+                        <div class="delete">
+                            <img src="../../../assets/img/icon_contact_delete.svg" alt="delete">
+                            <span>Delete</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="user-information">
-            Contact Information
-            <div class="email">
-                <span>Email</span>
-                <a href="mailto:email">{{ this.selectedContact?.email }}</a>
-            </div>
-            <div class="phone">
-                <span>Phone</span>
-                <a href="tel:number">{{ this.selectedContact?.phone_number }}</a>
+            <div class="user-information">
+                Contact Information
+                <div class="email">
+                    <span>Email</span>
+                    <a href="mailto:email">{{ this.selectedContact?.email }}</a>
+                </div>
+                <div class="phone">
+                    <span>Phone</span>
+                    <a href="tel:number">{{ this.selectedContact?.phone_number }}</a>
+                </div>
             </div>
         </div>
     </div>

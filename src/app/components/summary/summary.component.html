@@ -7,21 +7,21 @@
     <main>
         <div class="task-overview">
             <div class="top-section">
-                <div class="task-status">
+                <div class="task-status" (click)="selectComponent('board')">
                     <span class="task-count">{{ tasks.length }}</span>
                     <div class="task-description">
                         <span class="task-name">Tasks in</span>
                         <span class="task-name">Board</span>
                     </div>
                 </div>
-                <div class="task-status">
+                <div class="task-status" (click)="selectComponent('board')">
                     <span class="task-count">{{ inProgressTask.length }}</span>
                     <div class="task-description">
                         <span class="task-name">Tasks in</span>
                         <span class="task-name">Progress</span>
                     </div>
                 </div>
-                <div class="task-status">
+                <div class="task-status" (click)="selectComponent('board')">
                     <span class="task-count">{{ awaitingFeedbackTask.length }}</span>
                     <div class="task-description">
                         <span class="task-name">Awaiting</span>
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="middle-section">
-                <div class="urgent-tasks">
+                <div class="urgent-tasks" (click)="selectComponent('board')">
                     <img src="../../../assets/img/prio_urgent.svg" alt="prio-urgent">
                     <div class="urgent-text">
                         <span class="count">{{ urgentTasks.length }}</span>
@@ -45,15 +45,15 @@
                 </div>
             </div>
             <div class="bottom-section">
-                <div class="todo">
-                    <img src="../../../assets/img/icon_pencil.svg" alt="pencil-icon">
+                <div class="todo" (mouseover)="changeImage(1, 'todo')" (mouseout)="changeImage(0, 'todo')" (click)="selectComponent('board')">
+                    <img [src]="currentTodoImage" alt="pencil-icon">
                     <div class="todo-content">
                         <span class="count">{{ todoTasks.length }}</span>
                         <span class="title">To-Do</span>
                     </div>
                 </div>
-                <div class="done">
-                    <img src="../../../assets/img/icon_ok.svg" alt="ok-icon">
+                <div class="done" (mouseover)="changeImage(1, 'done')" (mouseout)="changeImage(0, 'done')" (click)="selectComponent('board')">
+                    <img [src]="currentDoneImage" alt="ok-icon">
                     <div class="done-content">
                         <span class="count">{{ doneTasks.length }}</span>
                         <span class="title">Done</span>

@@ -6,7 +6,7 @@
             <app-board *ngIf="selectedComponent=== 'board'"></app-board>
             <app-contacts *ngIf="selectedComponent=== 'contacts'"></app-contacts>
             <app-add-task *ngIf="selectedComponent=== 'addTask'"></app-add-task>
-            <app-summary *ngIf="selectedComponent=== 'summary'"></app-summary>
+            <app-summary *ngIf="selectedComponent=== 'summary'" (componentSelected)="onComponentSelect($event)"></app-summary>
         </div>
     </main>
 </div>

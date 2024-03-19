@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Task } from '../../models/task.class';
 import { TaskInterface } from '../../interfaces/task.interface';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
+
 
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [],
+  imports: [RouterOutlet, RouterModule],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss'
 })
@@ -21,6 +23,11 @@ export class SummaryComponent {
   public greeting: string = '';
   public error: string = '';
 
+
+  @Output() componentSelected = new EventEmitter<string>();
+
+
+
   constructor(private data: DataService) {
     this.data.getTasksTest().subscribe((tasks) => {
       this.tasks = tasks;
@@ -29,21 +36,25 @@ export class SummaryComponent {
     this.greetUser();
   }
 
+  selectComponent(component: string): void {
+    this.componentSelected.emit(component)
+  }
+
 
   greetUser() {
     const date = new Date().getHours();
     if (date < 10) {
-        this.greeting = 'Good morning,';
+      this.greeting = 'Good morning,';
     } else if (date < 14) {
-        this.greeting = 'Good day,';
+      this.greeting = 'Good day,';
     } else if (date < 17) {
-        this.greeting = 'Good afternoon,';
+      this.greeting = 'Good afternoon,';
     } else {
-        this.greeting = 'Good evening,';
+      this.greeting = 'Good evening,';
     }
-}
+  }
 
-  
+
   filterTasks(tasks: Task[]) {
     this.todoTasks = tasks.filter((task) => task.status === 'TODO');
     this.inProgressTask = tasks.filter((task) => task.status === 'PROGRESS');
@@ -69,7 +80,7 @@ export class SummaryComponent {
     if (!this.validateDeadline(deadline)) {
       this.error = '(Your last deadline is expired!)'
     }
-    const formatedDeadline = new Date(deadline).toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
+    const formatedDeadline = new Date(deadline).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     this.upcomingDeadline = formatedDeadline;
   }
 
@@ -82,5 +93,25 @@ export class SummaryComponent {
       return true;
     }
   }
+
+  todoImages: string[] = ['../../../assets/img/icon_pencil.svg', '../../../assets/img/whitePencil.svg'];
+  currentTodoImage: string = this.todoImages[0];
+  doneImages: string[] = ['../../../assets/img/icon_ok.svg', '../../../assets/img/whiteOk.svg'];
+  currentDoneImage: string = this.doneImages[0];
+  changeImage(index: number, type: string) {
+    switch (type) {
+      case 'done':
+        this.currentDoneImage = this.doneImages[index];
+        break;
+      case 'todo':
+        this.currentTodoImage = this.todoImages[index];
+        break;
+      default:
+        break;
+    }
+  }
+
+
+
 
 }
