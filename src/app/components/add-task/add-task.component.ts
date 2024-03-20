@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../../environments/environment';
 import { lastValueFrom } from 'rxjs';
@@ -16,7 +16,7 @@ import { User } from '../../models/user.class';
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
-export class AddTaskComponent implements OnInit {
+export class AddTaskComponent implements OnInit{
   title: string = '';
   description: string = '';
   due_date: Date | null = null;
@@ -27,13 +27,14 @@ export class AddTaskComponent implements OnInit {
   activeImage: string = '';
   categorys: Category[] = [];
   users: User[] = [];
-  
+  assignedContacts: string[] = [];
   selectedCategory!: number;
   categoryLabel: string | undefined = 'Select task category'
   categoryColor: string | undefined = '#FFF'
 
 
-  constructor(private http: HttpClient, private data: DataService) { }
+  constructor(private http: HttpClient, private data: DataService) {
+  }
 
   ngOnInit(): void {
     this.data.getCategorys().subscribe((category) => {
@@ -46,7 +47,7 @@ export class AddTaskComponent implements OnInit {
     this.data.getUsers().subscribe((users) => {
       this.users = users;
       console.log(this.users);
-      
+
     })
 
   }
@@ -92,11 +93,13 @@ export class AddTaskComponent implements OnInit {
   selectPriority(prio: string) {
     if (this.prio == prio) {
       this.prio = ''
+      this.changeImage(0, prio);
     } else {
+      this.changeImage(0, this.prio)
       this.prio = prio;
+      this.changeImage(1, prio);
     }
   }
-
 
   selectCategory(categoryId: number) {
     this.selectedCategory = categoryId;
@@ -127,4 +130,51 @@ export class AddTaskComponent implements OnInit {
     this.assignedMenu = !this.assignedMenu;
   }
 
+
+
+
+  lowImages: string[] = ['../../../assets/img/prio_low_color.png', '../../../assets/img/prio_low.png'];
+  mediumImages: string[] = ['../../../assets/img/prio_medium_color.png', '../../../assets/img/prio_medium.png'];
+  urgentImages: string[] = ['../../../assets/img/prio_urgent_color.png', '../../../assets/img/prio_urgent.png'];
+  currentLowImage: string = this.lowImages[0];
+  currentMediumImage: string = this.mediumImages[0];
+  currentUrgentImage: string = this.urgentImages[0];
+
+
+  changeImage(index: number, type: string) {
+    switch (type) {
+      case 'L': {
+        this.currentLowImage = this.lowImages[index];
+        break;
+      }
+      case 'M': {
+        this.currentMediumImage = this.mediumImages[index];
+        break;
+      }
+      case 'U': {
+        this.currentUrgentImage = this.urgentImages[index];
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  }
+
+  subtaskInactive: boolean = true;
+
+
+  toggleSubtasks() {
+    this.subtaskInactive = !this.subtaskInactive;
+  }
+  
+
+
+
 }
+
+
+
+
+
+

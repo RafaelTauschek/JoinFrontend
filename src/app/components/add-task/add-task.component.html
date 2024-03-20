@@ -41,20 +41,20 @@
                     <span class="input-label">Prio</span>
                     <div class="prio-buttons">
                         <button type="button" class="prio-btn" (click)="selectPriority('L')"
-                        [class.prio-low]="prio === 'L'">
-                        <span>Low</span>
-                        <img src="../../../assets/img/prio_low_color.png" alt="prio-low">
-                    </button>
-                    <button class="prio-btn" type="button" (click)="selectPriority('M')"
-                        [class.prio-medium]="prio === 'M'">
-                        <span>Medium</span>
-                        <img src="../../../assets/img/prio_medium_color.png" alt="prio-medium">
-                    </button>
-                    <button class="prio-btn" type="button" (click)="selectPriority('U')"
-                        [class.prio-urgent]="prio === 'U'">
-                        <span>Urgent</span>
-                        <img src="../../../assets/img/prio_urgent_color.png" [src] alt="prio-urgent">
-                    </button>
+                            [class.prio-low]="prio === 'L'">
+                            <span>Low</span>
+                            <img [src]="currentLowImage" alt="prio-low">
+                        </button>
+                        <button class="prio-btn" type="button" (click)="selectPriority('M')"
+                            [class.prio-medium]="prio === 'M'">
+                            <span>Medium</span>
+                            <img [src]="currentMediumImage" alt="prio-medium">
+                        </button>
+                        <button class="prio-btn" type="button" (click)="selectPriority('U')"
+                            [class.prio-urgent]="prio === 'U'">
+                            <span>Urgent</span>
+                            <img [src]="currentUrgentImage" alt="prio-urgent">
+                        </button>
                     </div>
                 </div>
                 <div class="form-input" (click)="openCategoryMenu()">
@@ -76,8 +76,21 @@
                 <div class="form-input">
                     <span class="input-label">Subtasks</span>
                     <div class="subtask-container">
-                        <span>Add new Subtask</span>
-                        <img src="../../../assets/img/plus_icon.png" alt="add subtask">
+                        <div class="subtask-inactive" *ngIf="subtaskInactive; else subtaskActive"
+                            (click)="toggleSubtasks()">
+                            <span>Add new Subtask</span>
+                            <img src="../../../assets/img/plus_icon.png" alt="add subtask">
+                        </div>
+                        <ng-template #subtaskActive>
+                            <div class="subtask-active">
+                                <input #inputField type="text" placeholder="Enter a new subtask">
+                                <div class="subtask-btn-container">
+                                    <img src="" alt="">
+                                    <div></div>
+                                    <img src="" alt="">
+                                </div>
+                            </div>
+                        </ng-template>
                     </div>
                 </div>
             </div>
@@ -88,3 +101,5 @@
         </div>
     </form>
 </div>
+
+<div class="overlay" *ngIf="!subtaskInactive" (click)="toggleSubtasks()"></div>

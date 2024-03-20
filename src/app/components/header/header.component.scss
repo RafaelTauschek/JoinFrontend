@@ -5,9 +5,27 @@ header {
     padding: 10px 25px 10px 50px;
     align-items: center;
 
+    @media only screen and (max-width: 768px) {
+        padding: 10px 25px 10px 25px;
+    }
+
     .title {
         font-size: 20px;
+
+        @media only screen and (max-width: 768px) {
+            display: none;
+        }
     }
+
+    .logo {
+        display: none;
+
+        @media only screen and (max-width: 768px) {
+            display: block;
+        }
+    }
+
+
 }
 
 .header-main {
@@ -16,6 +34,9 @@ header {
     gap: 1rem;
 
     .help-container {
+        @media only screen and (max-width: 768px) {
+            display: none;
+        }
 
         .help-icon {
             object-fit: cover;
@@ -37,11 +58,21 @@ header {
         border-radius: 50%;
         cursor: pointer;
 
+
+        @media only screen and (max-width: 550px) {
+            height: 42px;
+            width: 42px;
+        }
+
         span {
             color: #31aee3;
             font-weight: 700;
             margin: 0;
             font-size: 18px;
+
+            @media only screen and (max-width: 550px) {
+                font-size: 16px;
+            }
         }
     }
 

@@ -219,3 +219,28 @@ textarea {
         }
     }
 }
+
+.subtask-inactive {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    img {
+        object-fit: contain;
+    }
+} 
+
+.subtask-active {
+    z-index: 999;
+}
+
+
+.overlay {
+    height: 100dvh;
+    width: 100dvw;
+    background-color: transparent;
+    z-index: 998;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
