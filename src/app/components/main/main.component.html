@@ -1,12 +1,13 @@
 <div class="main-page">
     <app-sidebar (componentSelected)="onComponentSelect($event)"></app-sidebar>
     <main>
-        <app-header></app-header>
+        <app-header (componentSelected)="onComponentSelect($event)"></app-header>
         <div class="content">
             <app-board *ngIf="selectedComponent=== 'board'"></app-board>
             <app-contacts *ngIf="selectedComponent=== 'contacts'"></app-contacts>
             <app-add-task *ngIf="selectedComponent=== 'addTask'"></app-add-task>
             <app-summary *ngIf="selectedComponent=== 'summary'" (componentSelected)="onComponentSelect($event)"></app-summary>
+            <app-help *ngIf="selectedComponent === 'help'" (componentSelected)="onComponentSelect($event)"></app-help>
         </div>
     </main>
 </div>

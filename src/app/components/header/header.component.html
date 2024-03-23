@@ -2,11 +2,19 @@
     <span class="title">Kanban Project Management Tool</span>
     <img class="logo" src="../../../assets/img/logo_dark.svg">
     <div class="header-main">
-        <div class="help-container">
+        <div class="help-container" (click)="selectComponent('help')">
             <img class="help-icon" src="../../../assets/img/icon_help.svg" alt="help">
         </div>
-        <div class="user-menu">
+        <div class="user-menu" (click)="openMenu()">
             <span>GA</span>
         </div>
     </div>
 </header>
+
+<div class="menu" *ngIf="menuOpend">
+    <span (click)="selectComponent('help')">Help</span>
+    <span (click)="selectComponent('legal')">Leagl notice</span>
+    <span (click)="selectComponent('privacy')">Privacy Policy</span>
+    <span (click)="logout()">Log out</span>
+    <span (click)="selectComponent('help')">Imprint</span>
+</div>

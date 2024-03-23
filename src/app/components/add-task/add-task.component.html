@@ -25,9 +25,9 @@
                     <div class="assigned-menu" *ngIf="assignedMenu">
                         <div class="user-item" *ngFor="let user of users; let i = index">
                             <span>{{ user.username }}</span>
-                            <button>
-                                <img src="../../../assets/img/checkbox.svg" alt="checkbox">
-                            </button>
+                            <div (click)="assignUser(user)">
+                                <img [src]="user.checked ? checkboxImages[1] : checkboxImages[0]" alt="checkbox">
+                            </div>
                         </div>
                     </div>
                 </div>

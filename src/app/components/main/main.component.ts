@@ -11,6 +11,7 @@ import { ContactsComponent } from '../contacts/contacts.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { SummaryComponent } from '../summary/summary.component';
+import { HelpComponent } from '../help/help.component';
 
 @Component({
   selector: 'app-main',
@@ -19,7 +20,7 @@ import { SummaryComponent } from '../summary/summary.component';
     RouterOutlet, SidebarComponent, 
     BoardComponent, HeaderComponent, 
     ContactsComponent, MatSidenavModule,
-    AddTaskComponent, SummaryComponent
+    AddTaskComponent, SummaryComponent, HelpComponent
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'

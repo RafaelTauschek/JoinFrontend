@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../../environments/environment';
-import { lastValueFrom } from 'rxjs';
+import { filter, lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../../models/task.class';
 import { Category } from '../../models/category.class';
@@ -16,7 +16,7 @@ import { User } from '../../models/user.class';
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
-export class AddTaskComponent implements OnInit{
+export class AddTaskComponent implements OnInit {
   title: string = '';
   description: string = '';
   due_date: Date | null = null;
@@ -31,7 +31,7 @@ export class AddTaskComponent implements OnInit{
   selectedCategory!: number;
   categoryLabel: string | undefined = 'Select task category'
   categoryColor: string | undefined = '#FFF'
-
+  assignedUsers: number[] = []
 
   constructor(private http: HttpClient, private data: DataService) {
   }
@@ -45,12 +45,26 @@ export class AddTaskComponent implements OnInit{
     }, 500);
 
     this.data.getUsers().subscribe((users) => {
-      this.users = users;
+      this.filterUsers(users);
       console.log(this.users);
-
     })
-
   }
+
+
+  filterUsers(users: User[]) {
+    let filteredUsers: User[] = []
+    users.forEach((user) => {
+      let newUser = new User({
+        'username': user.username,
+        'id': user.id,
+        'checked': false,
+      });
+      filteredUsers.push(newUser);
+    });
+    this.users = filteredUsers;
+  }
+
+
 
 
   async addTask() {
@@ -63,6 +77,7 @@ export class AddTaskComponent implements OnInit{
       due_date: this.due_date,
       prio: this.prio,
       status: this.status,
+      assigned_to: this.assignedUsers,
       category: this.selectedCategory,
     })
     try {
@@ -167,17 +182,22 @@ export class AddTaskComponent implements OnInit{
   toggleSubtasks() {
     this.subtaskInactive = !this.subtaskInactive;
   }
-  
+
 
   checkboxImages: string[] = ['../../../assets/img/checkbox.svg', '../../../assets/img/checkbox_checked.svg'];
-  currentCheckbox: string = this.checkboxImages[0]
 
-  toggleCheckbox() {
 
+  assignUser(user: User) {
+    let index = this.assignedUsers.indexOf(user.id)
+    if (index == -1) {
+      this.assignedUsers.push(user.id);
+      user.checked = true;
+    } else {
+      this.assignedUsers.splice(index, 1);
+      user.checked = false;
+    }
+    console.log(this.assignedUsers);
   }
-
-
-
 }
 
 

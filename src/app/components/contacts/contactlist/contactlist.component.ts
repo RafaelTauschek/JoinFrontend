@@ -36,7 +36,7 @@ export class ContactlistComponent {
     this.contactList = map
     console.log(this.contactList);
   }
-
+;
   selectContact(contact: Object) {
     this.data.selectContact(contact as Contact)
   }
@@ -44,6 +44,6 @@ export class ContactlistComponent {
   addContactMenu: boolean = false;
 
   openAddContact() {
-    this.addContactMenu = !this.addContactMenu;
+    this.addContactMenu = !this.addContactMenu
   }
 }
