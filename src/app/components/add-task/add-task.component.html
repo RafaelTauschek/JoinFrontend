@@ -15,8 +15,8 @@
                         placeholder="Enter a description"></textarea>
                 </div>
 
-                <div class="form-input" (click)="openAssignedMenu()">
-                    <div class="assigned-container">
+                <div class="form-input">
+                    <div class="assigned-container" (click)="openAssignedMenu()">
                         <span class="input-label">Assigned to</span>
                         <button>
                             <img src="../../../assets/img/arrow_down.png" alt="dropdown">
@@ -25,6 +25,9 @@
                     <div class="assigned-menu" *ngIf="assignedMenu">
                         <div class="user-item" *ngFor="let user of users; let i = index">
                             <span>{{ user.username }}</span>
+                            <button>
+                                <img src="../../../assets/img/checkbox.svg" alt="checkbox">
+                            </button>
                         </div>
                     </div>
                 </div>

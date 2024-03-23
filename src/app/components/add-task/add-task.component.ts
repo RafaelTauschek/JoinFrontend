@@ -169,6 +169,13 @@ export class AddTaskComponent implements OnInit{
   }
   
 
+  checkboxImages: string[] = ['../../../assets/img/checkbox.svg', '../../../assets/img/checkbox_checked.svg'];
+  currentCheckbox: string = this.checkboxImages[0]
+
+  toggleCheckbox() {
+
+  }
+
 
 
 }

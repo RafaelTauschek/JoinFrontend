@@ -213,6 +213,7 @@ textarea {
         justify-content: space-between;
         padding: 8px 24px 8px 24px;
         cursor: pointer;
+        width: 420px;
 
         &:hover {
             background-color: rgb(239, 239, 239);
@@ -233,6 +234,7 @@ textarea {
 .subtask-active {
     z-index: 999;
 }
+
 
 
 .overlay {

@@ -26,7 +26,7 @@ export class ContactsComponent implements OnInit {
 
   async ngOnInit() {
     this.data.selectedContact$.subscribe(contact => {
-      this.selectedContact  = contact
+      this.selectedContact = contact
     });
     console.log('Contact recieved: ', this.selectedContact);
   }

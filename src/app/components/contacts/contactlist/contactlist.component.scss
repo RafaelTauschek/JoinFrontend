@@ -100,3 +100,15 @@
         }
     }
 }
+
+
+.add-contact-popup {
+    height: 100dvh;
+    width: 100dvw;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 999;
+}

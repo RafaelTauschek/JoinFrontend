@@ -3,24 +3,24 @@ import { DataService } from '../../../services/data.service';
 import { Contact } from '../../../models/contact.class';
 import { CommonModule } from '@angular/common';
 import { ContactInterface } from '../../../interfaces/contact.interface';
+import { AddContactComponent } from '../add-contact/add-contact.component';
+import { ContactsComponent } from '../contacts.component';
 
 @Component({
   selector: 'app-contactlist',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AddContactComponent, ContactsComponent],
   templateUrl: './contactlist.component.html',
   styleUrl: './contactlist.component.scss'
 })
 export class ContactlistComponent {
   contactList = new Map<string, ContactInterface[]>();
-  @Input() addContact = false;
 
   constructor(private data: DataService) {
     this.data.getContacts().subscribe((contacts) => {
       this.filterContacts(contacts);
-    })
+    });
   }
-
 
   filterContacts(contacts: Contact[]) {
     let map = new Map<string, ContactInterface[]>();
@@ -41,8 +41,9 @@ export class ContactlistComponent {
     this.data.selectContact(contact as Contact)
   }
 
+  addContactMenu: boolean = false;
+
   openAddContact() {
-    // this.addContactMenu = !this.addContactMenu
-    // console.log(this.addContactMenu);
+    this.addContactMenu = !this.addContactMenu;
   }
 }
