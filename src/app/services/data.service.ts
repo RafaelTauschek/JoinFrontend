@@ -7,9 +7,7 @@ import { Category } from '../models/category.class';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject, Observable, lastValueFrom } from 'rxjs';
 import { TaskInterface } from '../interfaces/task.interface';
-import { ContactInterface } from '../interfaces/contact.interface';
 import { SubtaskInterface } from '../interfaces/subtask.interface';
-import { CategoryInterface } from '../interfaces/category.interface';
 import { User } from '../models/user.class';
 
 @Injectable({
@@ -24,6 +22,9 @@ export class DataService {
   public users: Object = {}
   private selectedContactSubject: BehaviorSubject<Contact | null> = new BehaviorSubject<Contact | null>(null);
   selectedContact$: Observable<Contact | null> = this.selectedContactSubject.asObservable();
+  currentUserSubject: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
+  currentUser$: Observable<number | null> = this.currentUserSubject.asObservable();
+
 
   async getTasks() {
     const url = environment.baseUrl + '/tasks/';

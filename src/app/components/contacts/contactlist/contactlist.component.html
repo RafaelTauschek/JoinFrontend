@@ -11,7 +11,7 @@
               <div class="separator"></div>
             </div>
             <div class="single-contact" *ngFor="let contact of entry.value" (click)="selectContact(contact)">
-              <div class="user-acronym">
+              <div class="user-acronym" [style.background-color]="contact.color">
                 <span>{{ contact.first_name.charAt(0) + contact.last_name.charAt(0) }}</span>
               </div>
               <div class="user-information">

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Data, Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
 
 
@@ -18,12 +18,14 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private as: AuthService, private router: Router) {}
+  constructor(private as: AuthService, private router: Router, private data: DataService) {}
 
 
   async login() {
     try {
       let resp: any = await this.as.loginWithUsernameAndPassword(this.username, this.password);
+      console.log(resp);
+      this.data.currentUserSubject.next(resp.user_id)
       localStorage.setItem('token', resp['token']);
       this.router.navigateByUrl('/main')
     } catch (e) {

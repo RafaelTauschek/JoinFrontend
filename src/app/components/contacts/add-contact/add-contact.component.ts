@@ -24,11 +24,6 @@ export class AddContactComponent{
     this.data.selectedContact$.subscribe(contact => {
       this.selectedContact = contact
     });
-    if (this.selectedContact) {
-      this.name = this.selectedContact.first_name + '' + this.selectedContact.last_name;
-      this.email = this.selectedContact.email;
-      this.phone = this.selectedContact.phone_number;
-    }
   }
 
 

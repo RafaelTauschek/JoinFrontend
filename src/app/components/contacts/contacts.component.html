@@ -10,8 +10,8 @@
         </div>
         <div class="contact-wrapper" *ngIf="this.selectedContact">
             <div class="contact-header">
-                <div class="user-acronym">
-                    <span>LT</span>
+                <div class="user-acronym" [style.background-color]="selectedContact.color">
+                    <span>{{ selectedContact.first_name.charAt(0) + selectedContact.last_name.charAt(0) }}</span>
                 </div>
                 <div class="user-content">
                     <span class="username">{{ this.selectedContact.first_name + ' ' + this.selectedContact.last_name }}</span>

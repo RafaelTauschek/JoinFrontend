@@ -22,7 +22,7 @@ export class SummaryComponent {
   public upcomingDeadline: string = ''
   public greeting: string = '';
   public error: string = '';
-
+  public userid: number | null = null;
 
   @Output() componentSelected = new EventEmitter<string>();
 
@@ -34,12 +34,15 @@ export class SummaryComponent {
       this.filterTasks(tasks);
     });
     this.greetUser();
+    this.data.currentUser$.subscribe((user) => {
+      this.userid = user;
+      console.log(user); 
+    })
   }
 
   selectComponent(component: string): void {
     this.componentSelected.emit(component)
   }
-
 
   greetUser() {
     const date = new Date().getHours();

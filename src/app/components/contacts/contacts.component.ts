@@ -15,7 +15,7 @@ import { AddContactComponent } from './add-contact/add-contact.component';
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss'
 })
-export class ContactsComponent {
+export class ContactsComponent implements OnInit {
   contacts!: any;
   error!: any;
   selectedContact!: Contact | null;
@@ -24,8 +24,17 @@ export class ContactsComponent {
   editContact: boolean = false;
 
 
-  constructor(private http: HttpClient, public data: DataService) {}
+  constructor(private http: HttpClient, public data: DataService) {
 
+  }
+
+
+
+  ngOnInit(): void {
+      this.data.selectedContact$.subscribe((contact) => {
+        this.selectedContact = contact;
+      })
+  }
 
 
   firstname: string = '';
