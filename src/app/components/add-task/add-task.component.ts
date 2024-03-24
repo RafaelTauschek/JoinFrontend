@@ -85,34 +85,55 @@ export class AddTaskComponent implements OnInit {
 
 
   async addTask() {
-    if (this.status == '') {
-      this.status = 'TODO';
-    }
-    let task = new Task({
-      title: this.title,
-      description: this.description,
-      due_date: this.due_date,
-      prio: this.prio,
-      status: this.status,
-      assigned_to: this.assignedUsers,
-      category: this.selectedCategory,
-    })
     try {
-      let resp = await this.postTasks(task);
-      console.log(resp)
+      if (this.status == '') {
+        this.status = 'TODO';
+      }
+      let task = new Task({
+        title: this.title,
+        description: this.description,
+        due_date: this.due_date,
+        prio: this.prio,
+        status: this.status,
+        assigned_to: this.assignedUsers,
+        category: this.selectedCategory
+      });
+  
+      const createdTask: any = await this.postTasks(task);
+      console.log("Task created:", createdTask);
+      await this.postSubtasks(createdTask.id);
+  
+      console.log("Task and subtasks created successfully.");
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
   }
-
-
-
-
+  
   async postTasks(task: any) {
     const url = environment.baseUrl + '/tasks/';
-    const body = task.toJSON()
-    console.log('Body', body);
+    const body = task.toJSON();
+    console.log('Task Body', body);
     return lastValueFrom(this.http.post(url, body));
+  }
+  
+  async postSubtasks(taskId: number) {
+    const url = environment.baseUrl + '/subtasks/';
+    try {
+      const requests = this.subtasks.map(async (subtaskTitle: string) => {
+        const body = {
+          title: subtaskTitle,
+          status: 'U',
+          task: taskId
+        };
+        const response: any = await lastValueFrom(this.http.post(url, body));
+        return response.id;
+      });
+      const subtaskIds = await Promise.all(requests);
+      console.log("Subtasks posted successfully:", subtaskIds);
+    } catch (error) {
+      console.error("Error posting subtasks:", error);
+      throw error;
+    }
   }
 
   async putTask(taskId: number, task: any) {
