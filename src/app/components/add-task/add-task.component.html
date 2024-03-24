@@ -7,12 +7,13 @@
             <div class="left">
                 <div class="form-input">
                     <span class="input-label">Title</span>
-                    <input [(ngModel)]="title" type="text" name="title" placeholder="Enter a title">
+                    <input [(ngModel)]="title" type="text" name="title" placeholder="Enter a title"
+                        class="std-userinput">
                 </div>
                 <div class="form-textarea">
                     <span class="input-label">Description</span>
                     <textarea [(ngModel)]="description" name="description" id="" cols="30" rows="10"
-                        placeholder="Enter a description"></textarea>
+                        placeholder="Enter a description" class="std-userinput"></textarea>
                 </div>
 
                 <div class="form-input">
@@ -38,7 +39,8 @@
             <div class="right">
                 <div class="form-input">
                     <span class="input-label">Due date</span>
-                    <input [(ngModel)]="due_date" type="date" name="due_date" placeholder="due_date">
+                    <input [(ngModel)]="due_date" type="date" name="due_date" placeholder="due_date"
+                        class="std-userinput">
                 </div>
                 <div class="form-prio">
                     <span class="input-label">Prio</span>
@@ -77,24 +79,30 @@
                     </div>
                 </div>
                 <div class="form-input">
-                    <span class="input-label">Subtasks</span>
-                    <div class="subtask-container">
-                        <div class="subtask-inactive" *ngIf="subtaskInactive; else subtaskActive"
-                            (click)="toggleSubtasks()">
-                            <span>Add new Subtask</span>
-                            <img src="../../../assets/img/plus_icon.png" alt="add subtask">
-                        </div>
-                        <ng-template #subtaskActive>
-                            <div class="subtask-active">
-                                <input #inputField class="subtask-input" type="text" placeholder="Enter a new subtask">
-                                <div class="subtask-btn-container">
-                                    <img src="" alt="">
-                                    <div></div>
-                                    <img src="" alt="">
-                                </div>
-                            </div>
-                        </ng-template>
+                    <div class="subtask-container" *ngIf="!subtaskActive; else subtaskActiveContainer"
+                        (click)="toggleSubtask()">
+                        <span>Add new Subtask</span>
+                        <img src="../../../assets/img/plus_icon.png" alt="add subtask">
                     </div>
+
+                    <ng-template #subtaskActiveContainer>
+                        <div class="subtask-container">
+                            <input [(ngModel)]="subtask" name="subtask" type="text" placeholder="Enter a new Subtask"
+                                class="subtask-input">
+                            <div class="subtask-btn">
+                                <img src="../../../assets/img/icon_cancel.png" alt="cancel" class="cancel"
+                                    (click)="toggleSubtask()">
+                                <div class="subtask-seperator"></div>
+                                <img src="../../../assets/img/check_black_icon.png" alt="check" (click)="addSubtask()">
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+
+                <div class="subtask-list">
+                    <ul *ngFor="let subtask of subtasks">
+                        <li>{{ subtask }}</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -110,5 +118,3 @@
         </div>
     </form>
 </div>
-
-<div class="overlay" *ngIf="!subtaskInactive" (click)="toggleSubtasks()"></div>

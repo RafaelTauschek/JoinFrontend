@@ -29,12 +29,29 @@ export class AddTaskComponent implements OnInit {
   users: User[] = [];
   assignedContacts: string[] = [];
   selectedCategory!: number;
-  categoryLabel: string | undefined = 'Select task category'
-  categoryColor: string | undefined = '#FFF'
-  assignedUsers: number[] = []
+  categoryLabel: string | undefined = 'Select task category';
+  categoryColor: string | undefined = '#FFF';
+  assignedUsers: number[] = [];
+  subtaskActive: boolean = false;
 
   constructor(private http: HttpClient, private data: DataService) {
   }
+
+  toggleSubtask() {
+    this.subtaskActive = !this.subtaskActive;
+  }
+
+  subtasks: string[] = [];
+  subtask: string = '';
+
+  addSubtask() {
+    if (this.subtask) {
+      this.subtasks.push(this.subtask);
+      this.subtask = '';
+    }
+  }
+
+
 
   ngOnInit(): void {
     this.data.getCategorys().subscribe((category) => {
@@ -176,12 +193,10 @@ export class AddTaskComponent implements OnInit {
     }
   }
 
-  subtaskInactive: boolean = true;
 
 
-  toggleSubtasks() {
-    this.subtaskInactive = !this.subtaskInactive;
-  }
+
+
 
 
   checkboxImages: string[] = ['../../../assets/img/checkbox.svg', '../../../assets/img/checkbox_checked.svg'];

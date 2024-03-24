@@ -8,6 +8,8 @@
             <app-add-task *ngIf="selectedComponent=== 'addTask'"></app-add-task>
             <app-summary *ngIf="selectedComponent=== 'summary'" (componentSelected)="onComponentSelect($event)"></app-summary>
             <app-help *ngIf="selectedComponent === 'help'" (componentSelected)="onComponentSelect($event)"></app-help>
+            <app-privacy *ngIf="selectedComponent === 'privacy'" (componentSelected)="onComponentSelect($event)"></app-privacy>
+            <app-legalnotice *ngIf="selectedComponent === 'legal'" (componentSelected)="onComponentSelect($event)"></app-legalnotice> 
         </div>
     </main>
 </div>
