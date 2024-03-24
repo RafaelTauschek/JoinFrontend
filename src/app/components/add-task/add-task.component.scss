@@ -4,6 +4,7 @@
     gap: 2rem;
     padding-top: 100px;
     padding-left: 100px;
+    overflow-y: scroll !important;
 }
 
 .title {
@@ -91,7 +92,7 @@ textarea {
 
 .seperator {
     width: 1px;
-    background-color: white;
+    background-color: #d1d1d1;
     height: 400px;
 }
 
@@ -107,6 +108,51 @@ textarea {
     align-items: center;
     gap: 2rem;
     padding-right: 120px;
+
+
+    .clear-btn {
+        display: flex;
+        width: 136px;
+        height: 55px;
+        padding: 18px 10px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 10px;
+        background-color: white;
+        border: 1px solid #2a3647;
+        cursor: pointer;
+        font-size: 20px;
+        transition: 125ms ease-in-out;
+
+
+        &:hover {
+            border: 1px solid #29ABE2;
+            color: #29ABE2;
+        }
+    }
+
+    .submit-btn {
+        display: flex;
+        width: max-content;
+        height: 55px;
+        padding: 18px 10px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 10px;
+        background-color: #2a3647;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 20px;
+        transition: 125ms ease-in-out;
+
+        &:hover {
+            background-color: #29ABE2;
+        }
+    }
+
 }
 
 .prio-low {
@@ -229,12 +275,11 @@ textarea {
     img {
         object-fit: contain;
     }
-} 
+}
 
 .subtask-active {
     z-index: 999;
 }
-
 
 
 .overlay {
@@ -245,4 +290,166 @@ textarea {
     position: absolute;
     top: 0;
     left: 0;
+}
+
+
+@media only screen and (max-width: 1400px) {
+
+    input,
+    textarea,
+    .assigned-container,
+    .category-container,
+    .subtask-container {
+        width: 400px;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .add-task-section {
+        padding-left: 80px;
+    }
+
+    input,
+    textarea,
+    .assigned-container,
+    .category-container,
+    .subtask-container {
+        width: 360px;
+    }
+
+    .prio-btn {
+        width: 120px
+    }
+}
+
+
+@media only screen and (max-width: 1200px) {
+
+    input,
+    textarea,
+    .assigned-container,
+    .category-container,
+    .subtask-container {
+        width: 320px;
+    }
+
+    .prio-btn {
+        width: 110px;
+    }
+}
+
+
+@media only screen and (max-width: 1125px) {
+
+    .add-task-section {
+        align-items: center;
+    }
+
+    .form-main {
+        flex-direction: column;
+        align-items: center;
+        overflow-y: scroll;
+    }
+
+    .seperator {
+        display: none;
+    }
+
+
+    input,
+    textarea,
+    .assigned-container,
+    .category-container,
+    .subtask-container {
+        width: 422px;
+    }
+
+    .prio-btn {
+        width: 136px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .add-task-section {
+        padding-left: 0;
+        padding-top: 20px;
+    }
+
+    .btn-container {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    input,
+    textarea,
+    .assigned-container,
+    .category-container,
+    .subtask-container {
+        width: 400px;
+    }
+
+    .prio-btn {
+        width: 125px;
+    }
+}
+
+
+@media only screen and (max-width: 460px) {
+    input,
+    textarea,
+    .assigned-container,
+    .category-container,
+    .subtask-container {
+        width: 360px;
+    }
+
+    .prio-btn {
+        width: 115px;
+    }
+}
+
+
+@media only screen and (max-width: 420px) {
+    input,
+    textarea,
+    .assigned-container,
+    .category-container,
+    .subtask-container {
+        width: 320px;
+    }
+
+    .prio-btn {
+        width: 105px;
+        padding: 12px 8px;
+    }
+}
+
+
+@media only screen and (max-width: 380px) {
+    input,
+    textarea,
+    .assigned-container,
+    .category-container,
+    .subtask-container {
+        width: 300px;
+    }
+
+    .prio-btn {
+        width: 95px;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    input,
+    textarea,
+    .assigned-container,
+    .category-container,
+    .subtask-container {
+        width: 270px;
+    }
+
+    .prio-btn {
+        width: 90px;
+    }
 }

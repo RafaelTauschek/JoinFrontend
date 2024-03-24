@@ -5,7 +5,7 @@ export class Contact {
     email: string;
     phone_number: number;
     color: string;
-
+    readonly id: number;
 
     constructor(obj: any) {
         this.first_name = obj ? obj.first_name : '';
@@ -14,6 +14,7 @@ export class Contact {
         this.email = obj ? obj.email : '';
         this.phone_number = obj ? obj.phone_number : '';
         this.color = obj ? obj.color : '';
+        this.id = obj ? obj.id : undefined;
     }
 
 

@@ -25,7 +25,6 @@ export class DataService {
   private selectedContactSubject: BehaviorSubject<Contact | null> = new BehaviorSubject<Contact | null>(null);
   selectedContact$: Observable<Contact | null> = this.selectedContactSubject.asObservable();
 
-
   async getTasks() {
     const url = environment.baseUrl + '/tasks/';
     try {
@@ -66,16 +65,6 @@ export class DataService {
     return this.http.get<Category[]>(url)
   }
 
-  // async getUsers() {
-  //   const url = environment.baseUrl + '/users/';
-  //   try {
-  //     const resp = await lastValueFrom(this.http.get(url));
-  //     this.users = resp;
-  //     console.log(this.users);
-  //   } catch(e) {
-  //     console.error(e);
-  //   }
-  // }
 
   getUsers(): Observable<User[]> {
     const url = environment.baseUrl + '/users/';

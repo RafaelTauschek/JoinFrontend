@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { DataService } from '../../services/data.service';
 
 
 
@@ -23,7 +24,7 @@ export class LoginComponent {
   async login() {
     try {
       let resp: any = await this.as.loginWithUsernameAndPassword(this.username, this.password);
-      localStorage.setItem('token', resp['token'])
+      localStorage.setItem('token', resp['token']);
       this.router.navigateByUrl('/main')
     } catch (e) {
       console.log(e)

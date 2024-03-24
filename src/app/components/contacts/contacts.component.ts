@@ -21,6 +21,8 @@ export class ContactsComponent implements OnInit {
   selectedContact!: Contact | null;
   private addContactMenuSubject = new BehaviorSubject<boolean>(false);
   addContactMenu = this.addContactMenuSubject.asObservable();
+  editContact: boolean = false;
+
 
   constructor(private http: HttpClient, public data: DataService) {}
 
@@ -44,12 +46,19 @@ export class ContactsComponent implements OnInit {
       phone: this.phone
     })
     try {
-      let resp = await this.postContact(contact)
-
+      await this.postContact(contact).then(() => {
+        this.data.getContacts();
+      })
     } catch (e) {
       console.error(e)
     }
   }
+
+  openEditContact() {
+    this.editContact = !this.editContact;
+  }
+
+
 
   postContact(contact: any) {
     const url = environment.baseUrl + '/contacts/';
@@ -61,6 +70,16 @@ export class ContactsComponent implements OnInit {
   async loadContacts() {
     const url = environment.baseUrl + '/contacts/';
     return lastValueFrom(this.http.get(url))
+  }
+
+
+
+  deleteContact(contact: Contact) {
+    const url = environment.baseUrl + '/contacts/' + contact.id + '/';
+    lastValueFrom(this.http.delete(url)).then(() => {
+      this.data.getContacts();
+      this.selectedContact = null;
+    });
   }
 
   

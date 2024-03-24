@@ -86,7 +86,7 @@
                         </div>
                         <ng-template #subtaskActive>
                             <div class="subtask-active">
-                                <input #inputField type="text" placeholder="Enter a new subtask">
+                                <input #inputField class="subtask-input" type="text" placeholder="Enter a new subtask">
                                 <div class="subtask-btn-container">
                                     <img src="" alt="">
                                     <div></div>
@@ -99,8 +99,14 @@
             </div>
         </div>
         <div class="btn-container">
-            <button type="reset">Clear</button>
-            <button type="submit">Create Task</button>
+            <button type="reset" class="clear-btn">
+                <span>Clear</span>
+                <span>X</span>
+            </button>
+            <button type="submit" class="submit-btn">
+                <span>Create Task</span>
+                <img src="../../../assets/img/icon_check.png" alt="submit">
+            </button>
         </div>
     </form>
 </div>

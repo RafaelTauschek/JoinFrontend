@@ -25,6 +25,6 @@
 </div>
 
 <div class="add-contact-popup" *ngIf="addContactMenu">
-  <app-add-contact></app-add-contact>
+  <app-add-contact (addContactMenu)="addContactMenu = $event"></app-add-contact>
 </div>
 

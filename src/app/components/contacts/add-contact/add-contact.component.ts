@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { first, lastValueFrom } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Contact } from '../../../models/contact.class';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-add-contact',
@@ -12,14 +13,26 @@ import { Contact } from '../../../models/contact.class';
   templateUrl: './add-contact.component.html',
   styleUrl: './add-contact.component.scss'
 })
-export class AddContactComponent {
+export class AddContactComponent{
+  @Output() addContactMenu = new EventEmitter<boolean>();
   name: string = '';
   email: string = '';
   phone: number | null = null;
+  selectedContact!: Contact | null;
 
-  constructor(private http: HttpClient) {
-
+  constructor(private http: HttpClient, private data: DataService) {
+    this.data.selectedContact$.subscribe(contact => {
+      this.selectedContact = contact
+    });
+    if (this.selectedContact) {
+      this.name = this.selectedContact.first_name + '' + this.selectedContact.last_name;
+      this.email = this.selectedContact.email;
+      this.phone = this.selectedContact.phone_number;
+    }
   }
+
+
+
 
   colors = [
     { name: "Light Pink", hex: "#68A694" },
@@ -61,14 +74,14 @@ export class AddContactComponent {
     if (test.length === 2) {
       let firstName = test[0];
       let lastName = test[1];
-      return {firstName, lastName}
+      return { firstName, lastName }
     } else {
       let firstName = test;
       let lastName = '';
-      return {firstName, lastName} 
+      return { firstName, lastName }
     }
   }
-  
+
 
   async addContact() {
     let color = this.getRandomColor();
@@ -94,16 +107,21 @@ export class AddContactComponent {
   async postContact(contact: Contact) {
     const url = environment.baseUrl + '/contacts/';
     const body = contact.toJSON();
-    console.log('Body ' , body);
+    console.log('Body ', body);
     return lastValueFrom(this.http.post(url, body));
   }
 
 
 
+  closeMenu(state: boolean): void {
+    this.addContactMenu.emit(state)
+  } 
 
 
-
-
-
- 
+  cancel() {
+    this.name = '';
+    this.email = '',
+    this.phone = null;
+    this.closeMenu(false);
+  }
 }
