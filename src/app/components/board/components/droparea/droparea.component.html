@@ -1,50 +1,80 @@
 <div class="board-droparea" cdkDropListGroup>
     <!-- Todo Column -->
-    <div cdkDropList id="TODO" #todoList="cdkDropList" [cdkDropListData]="todoTasks" class="dragarea todo" (cdkDropListDropped)="drop($event)">
+    <div cdkDropList id="TODO" #todoList="cdkDropList" [cdkDropListData]="todoTasks" class="dragarea todo"
+        (cdkDropListDropped)="drop($event)">
         <div class="header">
             <span class="droptitle">To-Do</span>
             <img src="../../../../../assets/img/plusButton.svg" alt="add">
         </div>
-        <div class="single-task" *ngFor="let task of todoTasks" cdkDrag>
-            <div [ngStyle]="{'background': getCategoryColor(task.category)}" class="category">{{ getCategoryName(task.category) }}</div>
-            <div class="title">{{ task.title }}</div>
-            <div class="description">{{ task.description }}</div>
+        <div class="task-container">
+            <div class="single-task" *ngFor="let task of todoTasks" cdkDrag>
+                <div [ngStyle]="{'background': getCategoryColor(task.category)}" class="category">{{
+                    getCategoryName(task.category) }}</div>
+                <div class="title">{{ task.title }}</div>
+                <div class="description">{{ task.description }}</div>
+                <div class="subtask-container" *ngIf="task.subtasks.length > 0">
+                    <div class="progress-bar" role="progressbar">
+
+                    </div>
+                    <span class="progress-count">
+                        {{ getDoneSubtasks(task.subtasks) }} /
+                        {{ task.subtasks.length }}
+                    </span>
+                </div>
+                <div class="single-task-footer"></div>
+            </div>
         </div>
     </div>
 
     <!-- In Progress Column -->
-    <div cdkDropList id="PROGRESS" #inProgressList="cdkDropList" [cdkDropListData]="inProgressTask" class="dragarea in-progress" (cdkDropListDropped)="drop($event)">
+    <div cdkDropList id="PROGRESS" #inProgressList="cdkDropList" [cdkDropListData]="inProgressTask"
+        class="dragarea in-progress" (cdkDropListDropped)="drop($event)">
         <div class="header">
             <span class="droptitle">In Progress</span>
             <img src="../../../../../assets/img/plusButton.svg" alt="add">
         </div>
-        <div class="single-task" *ngFor="let task of inProgressTask" cdkDrag>
-            <div [ngStyle]="{'background': getCategoryColor(task.category)}" class="category">{{ getCategoryName(task.category) }}</div>
-            <div class="title">{{ task.title }}</div>
-            <div class="description">{{ task.description }}</div>
+        <div class="task-container">
+            <div class="single-task" *ngFor="let task of inProgressTask" cdkDrag>
+                <div [ngStyle]="{'background': getCategoryColor(task.category)}" class="category">{{
+                    getCategoryName(task.category) }}</div>
+                <div class="title">{{ task.title }}</div>
+                <div class="description">{{ task.description }}</div>
+                <div class="single-task-footer"></div>
+            </div>
         </div>
+
     </div>
 
     <!-- Awaiting Feedback Column -->
-    <div cdkDropList id="FEEDBACK" #awaitingFeedbackList="cdkDropList" [cdkDropListData]="awaitingFeedbackTask" class="dragarea await-feedback" (cdkDropListDropped)="drop($event)">
+    <div cdkDropList id="FEEDBACK" #awaitingFeedbackList="cdkDropList" [cdkDropListData]="awaitingFeedbackTask"
+        class="dragarea await-feedback" (cdkDropListDropped)="drop($event)">
         <div class="header">
             <span class="droptitle">Awaiting Feedback</span>
             <img src="../../../../../assets/img/plusButton.svg" alt="add">
         </div>
-        <div class="single-task" *ngFor="let task of awaitingFeedbackTask" cdkDrag>
-            <div [ngStyle]="{'background': getCategoryColor(task.category)}" class="category">{{ getCategoryName(task.category) }}</div>
-            <div class="title">{{ task.title }}</div>
-            <div class="description">{{ task.description }}</div>
+        <div class="task-container">
+            <div class="single-task" *ngFor="let task of awaitingFeedbackTask" cdkDrag>
+                <div [ngStyle]="{'background': getCategoryColor(task.category)}" class="category">{{
+                    getCategoryName(task.category) }}</div>
+                <div class="title">{{ task.title }}</div>
+                <div class="description">{{ task.description }}</div>
+                <div class="single-task-footer"></div>
+            </div>
         </div>
     </div>
 
     <!-- Done Column -->
-    <div cdkDropList id="DONE" #doneList="cdkDropList" [cdkDropListData]="doneTasks" class="dragarea done" (cdkDropListDropped)="drop($event)">
+    <div cdkDropList id="DONE" #doneList="cdkDropList" [cdkDropListData]="doneTasks" class="dragarea done"
+        (cdkDropListDropped)="drop($event)">
         <span class="droptitle">Done</span>
-        <div class="single-task" *ngFor="let task of doneTasks" cdkDrag>
-            <div [ngStyle]="{'background': getCategoryColor(task.category)}" class="category">{{ getCategoryName(task.category) }}</div>
-            <div class="title">{{ task.title }}</div>
-            <div class="description">{{ task.description }}</div>
+        <div class="task-container">
+            <div class="single-task" *ngFor="let task of doneTasks" cdkDrag>
+                <div [ngStyle]="{'background': getCategoryColor(task.category)}" class="category">{{
+                    getCategoryName(task.category) }}</div>
+                <div class="title">{{ task.title }}</div>
+                <div class="description">{{ task.description }}</div>
+                <div class="single-task-footer"></div>
+            </div>
         </div>
     </div>
 </div>

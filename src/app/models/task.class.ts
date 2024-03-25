@@ -1,3 +1,5 @@
+import { Subtask } from "./subtask.calss";
+
 export class Task {
     title: string;
     description: string;
@@ -6,6 +8,7 @@ export class Task {
     status: string;
     category: number;
     assigned_to: number[] | [];
+    subtasks: Subtask[];
     readonly id: number;
     readonly author: string;
     readonly created_at: string;
@@ -21,6 +24,7 @@ export class Task {
         this.id = obj ? obj.id : null;
         this.author = obj ? obj.author : '';
         this.created_at = obj ? obj.created_at : '';
+        this.subtasks = obj ? obj.subtasks : [];
     }
 
     public toJSON() {

@@ -43,23 +43,11 @@ export class DataService {
   }
 
 
-
   getContacts(): Observable<Contact[]> {
     const url = environment.baseUrl + '/contacts/';
     return this.http.get<Contact[]>(url);
   }
 
-
-  async getSubtasks() {
-    const url = environment.baseUrl + '/subtasks/';
-    try {
-      const resp = await lastValueFrom(this.http.get(url)) as Array<SubtaskInterface>;
-      const subtasks = resp.map((subtaskData: SubtaskInterface) => new Subtask(subtaskData));
-      this.subtasksSignal.set(subtasks)
-    } catch(e) {
-      console.error(e);
-    }
-  }
 
   getCategorys(): Observable<Category[]> {
     const url = environment.baseUrl + '/categorys/';
@@ -70,6 +58,11 @@ export class DataService {
   getUsers(): Observable<User[]> {
     const url = environment.baseUrl + '/users/';
     return this.http.get<User[]>(url)
+  }
+
+  getSubtasks(): Observable<Subtask[]> {
+    const url = environment.baseUrl + '/subtasks/';
+    return this.http.get<Subtask[]>(url)
   }
 
 

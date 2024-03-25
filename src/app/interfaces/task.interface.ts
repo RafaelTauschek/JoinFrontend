@@ -1,3 +1,5 @@
+import { Subtask } from "../models/subtask.calss";
+
 export interface TaskInterface {
     author: string;
     title: string;
@@ -8,4 +10,5 @@ export interface TaskInterface {
     prio: string;
     status: string;
     category: number;
+    subtasks: Subtask[];
 }

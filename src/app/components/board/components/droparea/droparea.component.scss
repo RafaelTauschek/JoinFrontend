@@ -4,6 +4,16 @@
     grid-template-rows: 1fr;
     gap: 2rem;
     min-height: 300px;
+
+    @media only screen and (max-width: 1250px) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    @media only screen and (max-width: 900px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+    }
 }
 
 .dragarea {
@@ -59,4 +69,15 @@
     font-weight: bold;
     font-size: 1.25rem;
     color: #42526e;
+}
+
+.task-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @media only screen and (max-width: 900px) {
+        flex-direction: row;
+        overflow-x: scroll;
+    }
 }

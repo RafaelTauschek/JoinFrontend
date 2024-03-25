@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { Category } from '../../../../models/category.class';
 import { environment } from '../../../../../environments/environment';
 import { last, lastValueFrom } from 'rxjs';
+import { Subtask } from '../../../../models/subtask.calss';
 
 
 
@@ -27,6 +28,7 @@ export class DropareaComponent implements OnInit {
   public http = inject(HttpClient);
   public categorys: Category[] = [];
   public tasktest: Task[] = []
+  public subtasks: Subtask[] = []
 
   constructor() {
     this.data.getTasks();
@@ -43,9 +45,47 @@ export class DropareaComponent implements OnInit {
     this.data.getTasksTest().subscribe((tasks) => {
       this.filterTasks(tasks);
     })
+
+    this.data.getSubtasks().subscribe((subtasks) => {
+      this.subtasks = subtasks;
+      console.log(subtasks);
+
+    })
   }
 
 
+
+  getDoneSubtasks(subtasks: Subtask[]) {
+    let doneCount = 0
+    subtasks.forEach((subtask) => {
+      if (subtask.status == "C") {
+        doneCount++;
+      }
+    });
+    if (doneCount == 0) {
+      return "0"
+    } else {
+      return doneCount;
+    }
+  }
+
+  countSubtaskProperty(subtasks: Subtask[]) {
+    let checkedCount = 0;
+    let uncheckedCount = 0;
+    subtasks.forEach((subtask) => {
+      if (subtask.status == "C") {
+        checkedCount++
+      } else {
+        uncheckedCount++
+      }
+    });
+    return { 'checked': checkedCount, 'unchecked': uncheckedCount }
+  }
+
+
+  calculateProgressBar(subtasks: Subtask[]) {
+
+  }
 
   getCategoryName(id: number) {
     let category = this.categorys.find((category: Category) => category.id === id);
@@ -66,6 +106,9 @@ export class DropareaComponent implements OnInit {
   }
 
 
+
+
+
   async drop(event: CdkDragDrop<Task[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -80,7 +123,7 @@ export class DropareaComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-       await this.updateTask(event.container.data, event.container.id)
+      await this.updateTask(event.container.data, event.container.id)
     }
   }
 
