@@ -13,7 +13,11 @@
     min-width: 232px;
 
     @media(max-width: 768px) {
-        
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        height: 80px;
+        width: 100%;
 
         img {
             display: none;

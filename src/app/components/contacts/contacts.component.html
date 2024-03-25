@@ -1,13 +1,16 @@
 <div class="contacts">
-    <div class="contact-list">
+    <div class="contact-list" *ngIf="!isMobile || showContactList" >
         <app-contactlist></app-contactlist>
     </div>
-    <div class="contact-preview">
+    <div class="contact-preview" *ngIf="!isMobile || !showContactList">
         <div class="header">
             <span class="title">Contacts</span>
             <div class="seperator"></div>
             <span class="description">Better with a team</span>
         </div>
+        <div class="back-img" *ngIf="isMobile && !showContactList" (click)="toggleContactList()">
+            <img src="../../../../assets/img/arrow-left-line.svg" alt="back">
+          </div>
         <div class="contact-wrapper" *ngIf="this.selectedContact">
             <div class="contact-header">
                 <div class="user-acronym" [style.background-color]="selectedContact.color">

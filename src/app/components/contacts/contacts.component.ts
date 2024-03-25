@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -22,10 +22,29 @@ export class ContactsComponent implements OnInit {
   private addContactMenuSubject = new BehaviorSubject<boolean>(false);
   addContactMenu = this.addContactMenuSubject.asObservable();
   editContact: boolean = false;
-
+  isMobile: boolean = false;
+  showContactList: boolean = true;
 
   constructor(private http: HttpClient, public data: DataService) {
+    this.checkIfMobile();
+  }
 
+
+
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event:any) {
+    this.checkIfMobile();
+  }
+
+  checkIfMobile() {
+    this.isMobile = window.matchMedia('(max-width: 1000px)').matches;
+  }
+
+
+
+  toggleContactList() {
+    this.showContactList = !this.showContactList;
   }
 
 

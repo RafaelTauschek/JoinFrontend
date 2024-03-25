@@ -16,7 +16,7 @@ import { ContactsComponent } from '../contacts.component';
 export class ContactlistComponent {
   contactList = new Map<string, ContactInterface[]>();
 
-  constructor(private data: DataService) {
+  constructor(private data: DataService, public c: ContactsComponent) {
     this.data.getContacts().subscribe((contacts) => {
       this.filterContacts(contacts);
     });
@@ -38,7 +38,9 @@ export class ContactlistComponent {
   }
 ;
   selectContact(contact: Object) {
-    this.data.selectContact(contact as Contact)
+    this.data.selectContact(contact as Contact);
+    this.c.toggleContactList();
+
   }
 
   addContactMenu: boolean = false;

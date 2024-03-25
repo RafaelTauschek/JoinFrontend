@@ -1,30 +1,32 @@
 <div class="contact-list">
-    <button class="add-contact">
-        <span (click)="openAddContact()">Add new contact</span>
-        <img src="../../../../assets/img/icon_add_contact.png" alt="add-contact">
-    </button>
-    <div class="contacts">
-        <div *ngFor="let entry of contactList | keyvalue">
-          <div class="contact-section">
-            <div class="contact-header">
-              <span>{{ entry.key }}</span>
-              <div class="separator"></div>
-            </div>
-            <div class="single-contact" *ngFor="let contact of entry.value" (click)="selectContact(contact)">
-              <div class="user-acronym" [style.background-color]="contact.color">
-                <span>{{ contact.first_name.charAt(0) + contact.last_name.charAt(0) }}</span>
-              </div>
-              <div class="user-information">
-                <span class="contact-name">{{ contact.first_name + ' ' + contact.last_name }}</span>
-                <span class="contact-mail">{{ contact.email }}</span>
-              </div>
-            </div>
+  <button class="add-contact" *ngIf="!c.isMobile" (click)="openAddContact()">
+    <span>Add new contact</span>
+    <img src="../../../../assets/img/icon_add_contact.png" alt="add-contact">
+  </button>
+  <button class="add-contact-mobile" *ngIf="c.isMobile" (click)="openAddContact()">
+    <img src="../../../../assets/img/icon_add_contact.png" alt="add-contact">
+  </button>
+  <div class="contacts">
+    <div *ngFor="let entry of contactList | keyvalue">
+      <div class="contact-section">
+        <div class="contact-header">
+          <span>{{ entry.key }}</span>
+          <div class="separator"></div>
+        </div>
+        <div class="single-contact" *ngFor="let contact of entry.value" (click)="selectContact(contact)">
+          <div class="user-acronym" [style.background-color]="contact.color">
+            <span>{{ contact.first_name.charAt(0) + contact.last_name.charAt(0) }}</span>
+          </div>
+          <div class="user-information">
+            <span class="contact-name">{{ contact.first_name + ' ' + contact.last_name }}</span>
+            <span class="contact-mail">{{ contact.email }}</span>
           </div>
         </div>
       </div>
+    </div>
+  </div>
 </div>
 
 <div class="add-contact-popup" *ngIf="addContactMenu">
   <app-add-contact (addContactMenu)="addContactMenu = $event"></app-add-contact>
 </div>
-
