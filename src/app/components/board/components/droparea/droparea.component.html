@@ -7,21 +7,22 @@
             <img src="../../../../../assets/img/plusButton.svg" alt="add">
         </div>
         <div class="task-container">
-            <div class="single-task" *ngFor="let task of todoTasks" cdkDrag>
+            <div class="single-task" *ngFor="let task of todoTasks" cdkDrag (click)="openTask(task)">
                 <div [ngStyle]="{'background': getCategoryColor(task.category)}" class="category">{{
                     getCategoryName(task.category) }}</div>
                 <div class="title">{{ task.title }}</div>
                 <div class="description">{{ task.description }}</div>
                 <div class="subtask-container" *ngIf="task.subtasks.length > 0">
-                    <div class="progress-bar" role="progressbar">
-
+                    <div class="progressbar-container" role="progressbar">
+                        <div [style.width.%]="calculateProgressBar(task.subtasks)"></div>
                     </div>
                     <span class="progress-count">
-                        {{ getDoneSubtasks(task.subtasks) }} /
-                        {{ task.subtasks.length }}
+                        {{ getDoneSubtasks(task.subtasks) }}/{{ task.subtasks.length }}
                     </span>
                 </div>
-                <div class="single-task-footer"></div>
+                <div class="single-task-footer">
+                    <img [src]="getPrioImage(task.prio)" alt="prio">
+                </div>
             </div>
         </div>
     </div>
@@ -39,7 +40,17 @@
                     getCategoryName(task.category) }}</div>
                 <div class="title">{{ task.title }}</div>
                 <div class="description">{{ task.description }}</div>
-                <div class="single-task-footer"></div>
+                <div class="subtask-container" *ngIf="task.subtasks.length > 0">
+                    <div class="progressbar-container" role="progressbar">
+                        <div [style.width.%]="calculateProgressBar(task.subtasks)"></div>
+                    </div>
+                    <span class="progress-count">
+                        {{ getDoneSubtasks(task.subtasks) }}/{{ task.subtasks.length }}
+                    </span>
+                </div>
+                <div class="single-task-footer">
+                    <img [src]="getPrioImage(task.prio)" alt="prio">
+                </div>
             </div>
         </div>
 
@@ -58,7 +69,17 @@
                     getCategoryName(task.category) }}</div>
                 <div class="title">{{ task.title }}</div>
                 <div class="description">{{ task.description }}</div>
-                <div class="single-task-footer"></div>
+                <div class="subtask-container" *ngIf="task.subtasks.length > 0">
+                    <div class="progressbar-container" role="progressbar">
+                        <div [style.width.%]="calculateProgressBar(task.subtasks)"></div>
+                    </div>
+                    <span class="progress-count">
+                        {{ getDoneSubtasks(task.subtasks) }}/{{ task.subtasks.length }}
+                    </span>
+                </div>
+                <div class="single-task-footer">
+                    <img [src]="getPrioImage(task.prio)" alt="prio">
+                </div>
             </div>
         </div>
     </div>
@@ -73,8 +94,22 @@
                     getCategoryName(task.category) }}</div>
                 <div class="title">{{ task.title }}</div>
                 <div class="description">{{ task.description }}</div>
-                <div class="single-task-footer"></div>
+                <div class="subtask-container" *ngIf="task.subtasks.length > 0">
+                    <div class="progressbar-container" role="progressbar">
+                        <div [style.width.%]="calculateProgressBar(task.subtasks)"></div>
+                    </div>
+                    <span class="progress-count">
+                        {{ getDoneSubtasks(task.subtasks) }}/{{ task.subtasks.length }}
+                    </span>
+                </div>
+                <div class="single-task-footer">
+                    <img [src]="getPrioImage(task.prio)" alt="prio">
+                </div>
             </div>
         </div>
     </div>
+
+
+
+    <app-taskcard *ngIf="displayTaskCard" [task]="selectedTask"></app-taskcard>
 </div>

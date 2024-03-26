@@ -8,13 +8,15 @@ import { Category } from '../../../../models/category.class';
 import { environment } from '../../../../../environments/environment';
 import { last, lastValueFrom } from 'rxjs';
 import { Subtask } from '../../../../models/subtask.calss';
+import { User } from '../../../../models/user.class';
+import { TaskcardComponent } from '../taskcard/taskcard.component';
 
 
 
 @Component({
   selector: 'app-droparea',
   standalone: true,
-  imports: [DragDropModule, CommonModule],
+  imports: [DragDropModule, CommonModule, TaskcardComponent],
   templateUrl: './droparea.component.html',
   styleUrl: './droparea.component.scss'
 })
@@ -23,18 +25,16 @@ export class DropareaComponent implements OnInit {
   public inProgressTask: Task[] = [];
   public awaitingFeedbackTask: Task[] = [];
   public doneTasks: Task[] = [];
-  public users: [] = [];
+  public users: User[] = [];
   public data = inject(DataService);
   public http = inject(HttpClient);
   public categorys: Category[] = [];
   public tasktest: Task[] = []
-  public subtasks: Subtask[] = []
+  public subtasks: Subtask[] = [];
 
   constructor() {
     this.data.getTasks();
     this.data.getUsers();
-    // effect(() => this.filterTasks(this.data.tasksSignal()));
-
   }
 
   ngOnInit(): void {
@@ -46,11 +46,10 @@ export class DropareaComponent implements OnInit {
       this.filterTasks(tasks);
     })
 
-    this.data.getSubtasks().subscribe((subtasks) => {
-      this.subtasks = subtasks;
-      console.log(subtasks);
-
+    this.data.getUsers().subscribe((users) => {
+      this.users = users
     })
+
   }
 
 
@@ -84,7 +83,9 @@ export class DropareaComponent implements OnInit {
 
 
   calculateProgressBar(subtasks: Subtask[]) {
-
+    let propertys = this.countSubtaskProperty(subtasks);
+    let percent = Math.floor((propertys.checked / subtasks.length) * 100);
+    return percent
   }
 
   getCategoryName(id: number) {
@@ -141,9 +142,31 @@ export class DropareaComponent implements OnInit {
     } catch (e) {
       console.error(e);
     }
-
-
   }
+
+  getPrioImage(prio: string) {
+    switch (prio) {
+      case ('M'):
+        return '../../../assets/img/prio_medium_color.png'
+      case ('U'):
+        return '../../../assets/img/prio_urgent_color.png'
+      default:
+        return '../../../assets/img/prio_low_color.png'
+    }
+  }
+
+  displayTaskCard: boolean = false;
+  selectedTask!: Task;
+
+  openTask(task: Task) {
+    this.selectedTask = task;
+    this.displayTaskCard = true;
+  }
+
+
+
+
+
 
 
 }

@@ -1,0 +1,15 @@
+.card {
+    position: relative;
+    min-height: 100px;
+    min-width: 500px;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 1.5rem;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+

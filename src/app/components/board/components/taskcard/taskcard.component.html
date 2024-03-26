@@ -1,0 +1,42 @@
+<div class="card">
+    <div class="top">
+        <div class="category" [style.background-color]="">
+            
+        </div>
+        <div class="back"></div>
+    </div>
+    <span class="title">
+        {{ task?.title }}
+    </span>
+    <span class="description">
+        {{ task?.description }}
+    </span>
+    <span class="due-date">
+        <span>Due date: {{ task?.due_date }}</span>
+    </span>
+    <div class="prio">
+        <span>Priority:</span>
+        <div [style.background-color]="">
+            <span>{{ task?.prio }}</span>
+            <img src="" alt="">
+        </div>
+    </div>
+    <div class="assigned">
+        <span>Assigned to:</span>
+        <div class="assinged-users" *ngFor="let user of task?.assigned_to">
+            <span>{{ user }}</span>
+        </div>
+    </div>
+    <div class="subtasks">
+        <span>Subtasks:</span>
+        <div class="subtask-list" *ngFor="let subtask of task?.subtasks">
+            <div class="single-subtask">
+                <span>{{ subtask.title }}</span>
+                <img [src]="" alt="checkbox">
+            </div>
+        </div>
+    </div>
+
+    <div class="btn-container"></div>
+
+</div>

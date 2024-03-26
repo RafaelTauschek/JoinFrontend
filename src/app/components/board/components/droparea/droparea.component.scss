@@ -81,3 +81,51 @@
         overflow-x: scroll;
     }
 }
+
+
+.subtask-container {
+    display: flex;
+    height: 10px;
+    align-items: center;
+    gap: 10px;
+}
+
+.progressbar-container {
+    background-color: rgb(209, 209, 209);
+    border-radius: 10px;
+    padding: 1px;
+    width: 80%;
+
+    div {
+        background-color: #0d6efd;
+        width: 40%;
+        height: 5px;
+        border-radius: 10px;
+}
+}
+
+.progress-count {
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.single-task-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 0.75rem;
+    padding-left: 0.75rem;
+
+    img {
+        width: 15px;
+        object-fit: contain;
+    }
+}
+
+app-taskcard {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
